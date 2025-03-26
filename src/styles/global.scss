@@ -1,0 +1,8 @@
+@import "./variables";
+@import "./themes";
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
