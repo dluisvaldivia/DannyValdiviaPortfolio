@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './styles/global.scss'
 import Home from './view/pages/Home.jsx'
 import NotFound from './view/pages/NotFound.jsx'
-import ThemeToggle from './view/components/ThemeToggle.jsx'
+import Navbar from './view/components/Navbar.jsx';
+import BackToTop from './view/components/backToTop.jsx';
 import {getInitialTheme, setTheme} from './controllers/themeController.js'
 
 
@@ -13,13 +14,14 @@ useEffect(() => {setTheme(getInitialTheme())}, []);
 
   return (
     <Router basename="/">
-      {/* <Navbar /> */}
-      <ThemeToggle />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+      <BackToTop />
       {/* <Footer /> */}
+
     </Router>
   )
 }

@@ -1,9 +1,14 @@
+@use "./variables" as vars;
+
 :root {
-    --bg-color: #{$light-bg};
-    --text-color: #{$light-text};
+  --bg-color: #{vars.$light-bg};
+  --text-color: #{vars.$light-text};
+  --font: 'Poppins', sans-serif;
+  --color-accent: #{vars.$light-accent};
 }
 
 [data-theme="dark"] {
-    --bg-color: #{$dark-bg};
-    --text-color: #{$dark-text};
+  --bg-color: #{vars.$dark-bg};
+  --text-color: #{vars.$dark-text};
+  --color-accent: #{vars.$dark-accent};
 }

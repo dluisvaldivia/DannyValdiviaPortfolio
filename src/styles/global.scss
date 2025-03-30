@@ -1,8 +1,71 @@
-@import "./variables";
-@import "./themes";
+@use "./variables" as vars;
+@use "./themes";
+@use "./navbar";
 
-body {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    transition: background 0.3s, color 0.3s;
+body, #root {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+  font-family: var(--font);
+  width: 100vw;
+  height: 100vh;
+}
+
+.icon-block {
+  display: flex;
+  flex-direction: horizontal;
+  align-items: center;
+  text-align: center;
+  margin: 10px;
+}
+
+.tech-icons {
+  width: 20px;
+  height: auto;
+}
+
+.icon-block span {
+  margin-top: 5px;
+  font-size: 1rem; 
+  font-weight: bold;
+}
+
+.heading1 {
+  margin-top: 2rem;;
+  font-size: 4rem;
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 20px; // Distance from the bottom of the viewport
+  left: 50%; // Center horizontally
+  transform: translateX(-50%); // Adjust for the button's width
+  background-color: var(--color-accent); // Customize as needed
+  color: var(--text-color);
+  border: none;
+  border-radius: 50%; // Make it circular
+  width: 50px;
+  height: 50px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0; // Initially hidden
+  visibility: hidden; // Initially hidden
+  transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+}
+
+.back-to-top.show {
+  opacity: 1; // Make it visible
+  visibility: visible; // Make it visible
+  transform: translateX(-50%) translateY(0); // Reset transform
+}
+
+.back-to-top:hover,
+.back-to-top:focus {
+  background-color: var(--color-accent); // Change color on hover or focus
+  outline: 3px solid var(--color-accent); // Add a focus outline for accessibility
+  outline-offset: 4px; // Add space between the outline and the button
 }

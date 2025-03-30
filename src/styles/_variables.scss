@@ -1,5 +1,9 @@
-$light-bg: #ffffff;
-$light-text: #222222;
+// light-theme
+$light-bg: hsl(0, 0%, 98%);
+$light-text: hsl(200, 15%, 8%);
+$light-accent: hsl(200, 89%, 57%);
 
-$dark-bg: #222222;
-$dark-text: #ffffff;
+// dark theme
+$dark-bg: hsl(207, 26%, 25%);
+$dark-text: hsl(0, 0%, 100%);
+$dark-accent: hsl(200, 50%, 59%);
