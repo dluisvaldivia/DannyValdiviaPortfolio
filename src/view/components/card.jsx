@@ -9,8 +9,8 @@ export default function Card({ title, description, image, link }) {
                 <h2 id={`card-title-${title}`} className="card__title">{title}</h2>
                 <p className="card__description">{description}</p>
                 {link && (
-                    <a href={link} className="card__link" aria-label={`Read more about ${title}`}>
-                        Read More
+                    <a href={link} className="card__link" aria-label={`follow link to ${title}`}>
+                        Visit {title}
                     </a>
                 )}
             </div>

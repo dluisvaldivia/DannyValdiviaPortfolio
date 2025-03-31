@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CardsList from '../components/cardList';
 
-
 export default function Home() {
+  const openCalendly = (e) => {
+    e.preventDefault(); // Prevent the default link behavior
+    window.Calendly.initPopupWidget({ url: 'https://calendly.com/dluis-valdivia/30min' });
+  };
+
+  // Added functionality to close Calendly because 'Esc' doesn't natively work.
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+
+        window.Calendly.closePopupWidget();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
   return (
 
     <div className='container'>
@@ -27,6 +45,8 @@ export default function Home() {
 
       <div className='row text-start'>
         <h2>Contact</h2>
+
+        <a href="#" onClick={openCalendly}>Schedule time with me</a>
 
       </div>
 

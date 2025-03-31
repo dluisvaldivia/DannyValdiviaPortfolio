@@ -13,7 +13,7 @@
     }
   
     &:focus-within {
-      outline: 2px solid var(--focus-color, #005fcc);
+      outline: 2px solid var(--focus-color, #005fcc93);
       transform: scale(1.02);
     }
   
@@ -30,17 +30,18 @@
     &__title {
       font-size: 1.25rem;
       margin: 0;
+      color: var(--text-color);
     }
   
     &__description {
       font-size: 1rem;
-      color: var(--text-color-secondary);
+      color: var(--text-color);
     }
   
     &__link {
       display: inline-block;
       margin-top: 0.5rem;
-      color: var(--color-accent);
+      color: #ff00d493;
       text-decoration: none;
       
       &:focus,
