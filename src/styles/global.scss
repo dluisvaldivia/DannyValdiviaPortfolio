@@ -1,6 +1,7 @@
 @use "./variables" as vars;
 @use "./themes";
 @use "./navbar";
+@use "./card";
 
 body, #root {
   background-color: var(--bg-color);
@@ -37,13 +38,13 @@ body, #root {
 
 .back-to-top {
   position: fixed;
-  bottom: 20px; // Distance from the bottom of the viewport
-  left: 50%; // Center horizontally
-  transform: translateX(-50%); // Adjust for the button's width
-  background-color: var(--color-accent); // Customize as needed
+  bottom: 20px;
+  left: 50%; 
+  transform: translateX(-50%); 
+  background-color: var(--color-accent); 
   color: var(--text-color);
   border: none;
-  border-radius: 50%; // Make it circular
+  border-radius: 50%;
   width: 50px;
   height: 50px;
   font-size: 1.5rem;
@@ -52,20 +53,20 @@ body, #root {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  opacity: 0; // Initially hidden
-  visibility: hidden; // Initially hidden
+  opacity: 0;
+  visibility: hidden;
   transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
 }
 
 .back-to-top.show {
-  opacity: 1; // Make it visible
-  visibility: visible; // Make it visible
-  transform: translateX(-50%) translateY(0); // Reset transform
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0); 
 }
 
 .back-to-top:hover,
 .back-to-top:focus {
-  background-color: var(--color-accent); // Change color on hover or focus
-  outline: 3px solid var(--color-accent); // Add a focus outline for accessibility
-  outline-offset: 4px; // Add space between the outline and the button
+  background-color: var(--color-accent);
+  outline: 3px solid var(--color-accent);
+  outline-offset: 4px;
 }

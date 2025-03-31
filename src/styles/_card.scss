@@ -1,0 +1,51 @@
+.card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-accent);
+    max-width: 98%;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.05);
+    }
+  
+    &:focus-within {
+      outline: 2px solid var(--focus-color, #005fcc);
+      transform: scale(1.02);
+    }
+  
+    &__image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+  
+    &__content {
+      padding: 1rem;
+    }
+  
+    &__title {
+      font-size: 1.25rem;
+      margin: 0;
+    }
+  
+    &__description {
+      font-size: 1rem;
+      color: var(--text-color-secondary);
+    }
+  
+    &__link {
+      display: inline-block;
+      margin-top: 0.5rem;
+      color: var(--color-accent);
+      text-decoration: none;
+      
+      &:focus,
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
