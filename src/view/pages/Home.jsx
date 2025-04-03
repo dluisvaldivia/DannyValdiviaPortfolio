@@ -3,7 +3,7 @@ import CardsList from '../components/cardList';
 
 export default function Home() {
   const openCalendly = (e) => {
-    e.preventDefault(); // Prevent the default link behavior
+    e.preventDefault();
     window.Calendly.initPopupWidget({ url: 'https://calendly.com/dluis-valdivia/30min' });
   };
 
@@ -21,8 +21,8 @@ export default function Home() {
     };
   }, []);
 
-  return (
 
+  return (
     <div className='container'>
 
       <div className='row mt-3 mb-2'>
