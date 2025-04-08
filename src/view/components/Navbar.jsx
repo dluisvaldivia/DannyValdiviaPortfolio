@@ -3,11 +3,17 @@ import "../../styles/_navbar.scss";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Navbar() {
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <nav>
-      <button className="item">About</button>
-      <button className="item">Projects</button>
-      <button className="item">Contact</button>
+      <button className="item" onClick={() => scrollToSection("projects")}>Projects</button>
+      <button className="item" onClick={() => scrollToSection("contact")}>Contact</button>
       <ThemeToggle />
     </nav>
   );

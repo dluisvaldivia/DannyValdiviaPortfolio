@@ -1,7 +1,7 @@
 .card {
     display: flex;
     flex-direction: column;
-    background: var(--color-accent);
+    background: var(--color-primary);
     max-width: 98%;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -13,7 +13,7 @@
     }
   
     &:focus-within {
-      outline: 2px solid var(--focus-color, #005fcc93);
+      outline: 2px solid var(--color-secondary);
       transform: scale(1.02);
     }
   
@@ -24,6 +24,9 @@
     }
   
     &__content {
+      display: flex;
+      flex-direction: column; 
+      flex-grow: 1;
       padding: 1rem;
     }
   
@@ -40,8 +43,8 @@
   
     &__link {
       display: inline-block;
-      margin-top: 0.5rem;
-      color: #ff00d493;
+      margin-top: auto;
+      color: var(--color-accent);
       text-decoration: none;
       
       &:focus,

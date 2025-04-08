@@ -7,16 +7,16 @@ export const cardsData = [
   },
   {
     id: 2,
-    title: "React Performance Tips",
-    description: "Optimize your React applications for better performance.",
+    title: "ExpenseVue",
+    description: "expense management application with integration to banking data.",
     /* image: "https://via.placeholder.com/300", */
-    link: "/react-performance"
+    link: "https://sample-service-name-ikx9.onrender.com/"
   },
   {
-    id: 3,
-    title: "SCSS for Scalable Styles",
-    description: "Organize and maintain your styles efficiently with SCSS.",
+     id: 3,
+    title: "still to come",
+    description: "working on it",
     /* image: "https://via.placeholder.com/300", */
-    link: "/scss-guide"
+   /*  link: "/scss-guide" */
   }
 ];

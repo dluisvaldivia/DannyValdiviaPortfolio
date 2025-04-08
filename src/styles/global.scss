@@ -2,6 +2,7 @@
 @use "./themes";
 @use "./navbar";
 @use "./card";
+@use "./font";
 
 body, #root {
   background-color: var(--bg-color);
@@ -20,20 +21,11 @@ body, #root {
   margin: 10px;
 }
 
-.tech-icons {
-  width: 20px;
-  height: auto;
-}
 
 .icon-block span {
   margin-top: 5px;
   font-size: 1rem; 
   font-weight: bold;
-}
-
-.heading1 {
-  margin-top: 2rem;;
-  font-size: 4rem;
 }
 
 .back-to-top {
@@ -69,4 +61,10 @@ body, #root {
   background-color: var(--color-accent);
   outline: 3px solid var(--color-accent);
   outline-offset: 4px;
+}
+
+.custom-icons {
+  width: 10rem;
+  height: auto;
+  margin-bottom: 1rem;
 }

@@ -3,12 +3,16 @@
 :root {
   --bg-color: #{vars.$light-bg};
   --text-color: #{vars.$light-text};
-  --font: 'Poppins', sans-serif;
+  --color-primary: #{vars.$light-primary};
+  --color-secondary: #{vars.$light-secondary};
   --color-accent: #{vars.$light-accent};
+  --font: "DM Sans", sans-serif, system-ui;
 }
 
 [data-theme="dark"] {
   --bg-color: #{vars.$dark-bg};
+  --color-primary: #{vars.$dark-primary};
+  --color-secondary: #{vars.$dark-secondary};
   --text-color: #{vars.$dark-text};
   --color-accent: #{vars.$dark-accent};
 }
