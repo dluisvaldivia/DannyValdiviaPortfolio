@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
+import whatsappIcon from '../../assets/icons8-whatsapp.svg';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -170,7 +171,7 @@ const AccessibilityChecker = () => {
                                 <p className="ac-plain-summary">{summaryHeadline}</p>
                                 <button className="whatsapp-button" onClick={whatsappClick}>
                                     <img
-                                        src="/src/assets/icons8-whatsapp.svg"
+                                        src={whatsappIcon}
                                         alt="WhatsApp"
                                         style={{ width: '28px', height: '28px', marginRight: '12px' }}
                                     />

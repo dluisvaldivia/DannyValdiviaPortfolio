@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import { LuExternalLink } from 'react-icons/lu';
 
 interface CardProps {
   title: string;
@@ -18,16 +19,17 @@ export default function Card({ title, description, link }: CardProps) {
     >
       <div className="card__content flex flex-col h-full">
         <h2 id={titleId} className="card__title">{title}</h2>
-        <p className="card__description flex-1">{description}</p>
+        <p className="card__description flex-1 mb-2">{description}</p>
         {link && (
           <a
             href={link}
             target="_blank"
-            className="card__link mt-auto pt-3 inline-block"
+            className="button-primary mt-auto relative cursor-pointer no-underline"
             aria-label={`Visit ${title}, opens in new tab`}
             rel="noopener noreferrer"
           >
-            <button className="button-primary">Visit {title}</button>
+            Visit {title}
+            <LuExternalLink className="absolute top-2 right-2" />
           </a>
         )}
       </div>

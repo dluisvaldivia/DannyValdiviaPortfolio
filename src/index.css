@@ -87,12 +87,257 @@
 
 @layer components {
 
+    /* ── Rich text editor (Tiptap) ── */
+    .editor-toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2px;
+        padding: 6px 10px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 7px 7px 0 0;
+    }
+
+    .editor-toolbar-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        border-radius: 5px;
+        border: none;
+        background: transparent;
+        color: rgba(232, 232, 240, 0.55);
+        font-size: 0.8rem;
+        cursor: pointer;
+        transition: background 0.15s, color 0.15s;
+        flex-shrink: 0;
+    }
+
+    .editor-toolbar-btn:hover {
+        background: rgba(255, 255, 255, 0.08);
+        color: #e8e8f0;
+    }
+
+    .editor-toolbar-btn.is-active {
+        background: rgba(0, 103, 79, 0.2);
+        color: #00a87e;
+    }
+
+    .editor-toolbar-btn:disabled {
+        opacity: 0.25;
+        cursor: not-allowed;
+    }
+
+    .editor-toolbar-sep {
+        width: 1px;
+        background: rgba(255, 255, 255, 0.08);
+        margin: 3px 4px;
+        align-self: stretch;
+    }
+
+    .tiptap-editor {
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 0 0 7px 7px;
+        background: rgba(255, 255, 255, 0.04);
+        min-height: 340px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .tiptap-editor:focus-within {
+        border-color: #00674F;
+        box-shadow: 0 0 0 3px rgba(0, 103, 79, 0.15);
+    }
+
+    .tiptap-editor .ProseMirror {
+        padding: 14px 16px;
+        outline: none;
+        min-height: 340px;
+        color: #e8e8f0;
+        line-height: 1.75;
+        font-size: 0.92rem;
+        caret-color: #00a87e;
+    }
+
+    .tiptap-editor .ProseMirror > * + * {
+        margin-top: 0.75em;
+    }
+
+    .tiptap-editor .ProseMirror p {
+        margin: 0 0 0.75em;
+    }
+
+    .tiptap-editor .ProseMirror h2 {
+        font-size: 1.4rem;
+        font-weight: 700;
+        color: #e8e8f0;
+        margin: 1.4em 0 0.5em;
+    }
+
+    .tiptap-editor .ProseMirror h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: #e8e8f0;
+        margin: 1.2em 0 0.4em;
+    }
+
+    .tiptap-editor .ProseMirror strong { font-weight: 700; color: #fff; }
+    .tiptap-editor .ProseMirror em { font-style: italic; }
+    .tiptap-editor .ProseMirror s { text-decoration: line-through; opacity: 0.7; }
+
+    .tiptap-editor .ProseMirror ul,
+    .tiptap-editor .ProseMirror ol {
+        padding-left: 1.4em;
+        margin: 0 0 0.75em;
+    }
+
+    .tiptap-editor .ProseMirror li { margin-bottom: 0.25em; }
+
+    .tiptap-editor .ProseMirror blockquote {
+        border-left: 3px solid #00674F;
+        padding-left: 1em;
+        color: rgba(232, 232, 240, 0.6);
+        font-style: italic;
+        margin: 1em 0;
+    }
+
+    .tiptap-editor .ProseMirror code {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        padding: 0.15em 0.4em;
+        font-size: 0.85em;
+        font-family: monospace;
+        color: #a8ebd0;
+    }
+
+    .tiptap-editor .ProseMirror pre {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 6px;
+        padding: 1em 1.2em;
+        overflow-x: auto;
+        margin: 0.75em 0;
+    }
+
+    .tiptap-editor .ProseMirror pre code {
+        background: none;
+        border: none;
+        padding: 0;
+        font-size: 0.85em;
+        color: #a8ebd0;
+    }
+
+    .tiptap-editor .ProseMirror hr {
+        border: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        margin: 1.5em 0;
+    }
+
+    .tiptap-editor .ProseMirror a {
+        color: #00a87e;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .tiptap-editor .ProseMirror img {
+        max-width: 100%;
+        border-radius: 6px;
+        margin: 0.5em 0;
+    }
+
+    /* Placeholder */
+    .tiptap-editor .ProseMirror p.is-editor-empty:first-child::before {
+        content: attr(data-placeholder);
+        color: rgba(232, 232, 240, 0.22);
+        pointer-events: none;
+        float: left;
+        height: 0;
+    }
+
+    /* ── Blog prose ── */
+    .blog-content {
+        color: rgba(232, 232, 240, 0.82);
+        line-height: 1.8;
+        font-size: 1.05rem;
+    }
+    .blog-content p {
+        margin-bottom: 1.4em;
+    }
+    .blog-content h2,
+    .blog-content h3 {
+        color: var(--text-color);
+        margin-top: 2em;
+        margin-bottom: 0.6em;
+    }
+    .blog-content h2 { font-size: 1.5rem; }
+    .blog-content h3 { font-size: 1.2rem; }
+    .blog-content strong {
+        color: var(--text-color);
+        font-weight: 600;
+    }
+    .blog-content em {
+        color: rgba(232, 232, 240, 0.9);
+    }
+    .blog-content a {
+        color: var(--accent-color);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+    .blog-content a:hover {
+        color: #00a87e;
+    }
+    .blog-content ul,
+    .blog-content ol {
+        margin-bottom: 1.4em;
+        padding-left: 1.5em;
+    }
+    .blog-content li {
+        margin-bottom: 0.4em;
+    }
+    .blog-content code {
+        background: rgba(255, 255, 255, 0.07);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+        padding: 0.15em 0.4em;
+        font-size: 0.88em;
+        font-family: 'Geist Mono', monospace;
+        color: #a8ebd0;
+    }
+    .blog-content pre {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 8px;
+        padding: 1.2em 1.4em;
+        overflow-x: auto;
+        margin-bottom: 1.4em;
+    }
+    .blog-content pre code {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    .blog-content blockquote {
+        border-left: 3px solid var(--accent-color);
+        padding-left: 1.2em;
+        margin: 1.6em 0;
+        color: rgba(232, 232, 240, 0.6);
+        font-style: italic;
+    }
+
     /* ── Hero H1 ── */
     .h1hero {
-        font-size: clamp(4rem, 12vw, 10rem);
+        font-size: clamp(2rem, 10vw, 10rem);
         line-height: 1;
         letter-spacing: -0.02em;
         padding-bottom: 0.2em;
+    }
+
+    @media (max-width: 639px) {
+        .h1hero {
+            font-size: 15.5vw;
+        }
     }
 
     /* ── Navbar ── */
@@ -178,6 +423,12 @@
         box-shadow: 0 0 30px rgba(0, 103, 79, 0.55);
         transform: translateY(-1px);
         outline: none;
+    }
+
+    .button-primary:focus-visible {
+        outline: 2px solid #2222F7;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 4px rgba(34, 34, 247, 0.25), 0 0 30px rgba(0, 103, 79, 0.55);
     }
 
     /* ── Project Card ── */
@@ -479,7 +730,239 @@
     /* ── Shimmer divider ── */
     .shimmer-line {
         height: 1px;
+        margin-bottom: 2rem;
         background: linear-gradient(90deg, transparent, rgba(0, 103, 79, 0.7), rgba(34, 34, 247, 0.7), transparent);
+    }
+
+    /* ── Contact Section ── */
+    .contact-section {
+        position: relative;
+        overflow: hidden;
+        padding: clamp(2.5rem, 6vw, 5rem) 0 clamp(2rem, 4vw, 3.5rem);
+    }
+
+    .contact-section::before {
+        content: '';
+        position: absolute;
+        top: 0; left: 0; right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent 0%, #00674F 30%, #2222F7 70%, transparent 100%);
+        box-shadow: 0 0 24px 2px rgba(0,103,79,0.5), 0 0 48px 4px rgba(34,34,247,0.25);
+        z-index: 1;
+    }
+
+    .contact-bg-glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+            radial-gradient(ellipse 80% 60% at 15% 50%, rgba(0,103,79,0.09) 0%, transparent 65%),
+            radial-gradient(ellipse 70% 55% at 85% 40%, rgba(34,34,247,0.07) 0%, transparent 65%);
+    }
+
+    .contact-inner {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 780px;
+        margin: 0 auto;
+        padding: 0 1rem;
+    }
+
+    .contact-heading-block {
+        text-align: center;
+        margin-bottom: 2.5rem;
+    }
+
+    .contact-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #00674F;
+        margin: 0 0 0.75rem;
+    }
+
+    .contact-heading {
+        font-size: clamp(2.8rem, 7vw, 5rem) !important;
+        line-height: 1.05 !important;
+        margin: 0 0 1rem !important;
+        background: linear-gradient(90deg, #00c87a 0%, #7b8cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+    }
+
+    .contact-subline {
+        font-size: 1.05rem;
+        color: rgba(232,232,240,0.55);
+        margin: 0;
+        line-height: 1.6;
+    }
+
+    .contact-form-card {
+        background: rgba(255,255,255,0.035);
+        border: 1px solid rgba(255,255,255,0.1);
+        border-radius: 8px;
+        padding: clamp(1.75rem, 4vw, 3rem);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.07),
+            0 0 60px rgba(0,103,79,0.07),
+            0 0 100px rgba(34,34,247,0.04);
+        transition: box-shadow 0.4s ease, border-color 0.4s ease;
+    }
+
+    .contact-form-card:focus-within {
+        border-color: rgba(0,103,79,0.4);
+        box-shadow:
+            inset 0 1px 0 rgba(255,255,255,0.09),
+            0 0 0 1px rgba(0,103,79,0.12),
+            0 0 60px rgba(0,103,79,0.12),
+            0 0 100px rgba(34,34,247,0.06);
+    }
+
+    .contact-fields-row {
+        display: flex;
+        gap: 1.25rem;
+        margin-bottom: 0;
+    }
+
+    @media (max-width: 540px) {
+        .contact-fields-row { flex-direction: column; gap: 0; }
+    }
+
+    .contact-field-group {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .contact-label {
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #ffffff;
+    }
+
+    .contact-input {
+        width: 100%;
+        padding: 14px 18px;
+        border-radius: 6px;
+        background: rgba(255,255,255,0.04);
+        border: 1px solid rgba(255,255,255,0.09);
+        color: #e8e8f0;
+        font-size: 0.95rem;
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .contact-input::placeholder { color: rgba(232,232,240,0.22); }
+
+    .contact-input:focus {
+        border-color: #00674F;
+        box-shadow: 0 0 0 3px rgba(0,103,79,0.18);
+        background: rgba(255,255,255,0.06);
+    }
+
+    .contact-input:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .contact-textarea {
+        resize: vertical;
+        min-height: 160px;
+        line-height: 1.65;
+    }
+
+    .contact-feedback {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.85rem 1.1rem;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        margin-bottom: 1.25rem;
+    }
+
+    .contact-feedback--success {
+        background: rgba(0,103,79,0.12);
+        border: 1px solid rgba(0,103,79,0.35);
+        color: #00c87a;
+    }
+
+    .contact-feedback--error {
+        background: rgba(255,77,77,0.1);
+        border: 1px solid rgba(255,77,77,0.3);
+        color: #ff6b6b;
+    }
+
+    .contact-submit {
+        width: 100%;
+        padding: 16px 24px;
+        margin-top: 0.25rem;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        background: linear-gradient(135deg, #00674F 0%, #2222F7 100%);
+        box-shadow: 0 0 30px rgba(0,103,79,0.35), 0 4px 16px rgba(0,0,0,0.4);
+        transition: box-shadow 0.25s ease, transform 0.2s ease, opacity 0.2s ease;
+        position: relative;
+        overflow: hidden;
+        min-height: 52px;
+    }
+
+    .contact-submit::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.12) 50%, transparent 60%);
+        transform: translateX(-100%);
+        transition: transform 0.5s ease;
+    }
+
+    .contact-submit:hover:not(:disabled)::after { transform: translateX(100%); }
+
+    .contact-submit:hover:not(:disabled) {
+        box-shadow: 0 0 50px rgba(34,34,247,0.5), 0 6px 24px rgba(0,0,0,0.45);
+        transform: translateY(-1px);
+    }
+
+    .contact-submit:focus-visible {
+        outline: 2px solid #2222F7;
+        outline-offset: 3px;
+        box-shadow: 0 0 0 4px rgba(34,34,247,0.25), 0 0 40px rgba(0,103,79,0.4);
+    }
+
+    .contact-submit:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    .contact-spinner {
+        display: inline-block;
+        width: 18px;
+        height: 18px;
+        border: 2px solid rgba(255,255,255,0.3);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: contact-spin 0.7s linear infinite;
+        vertical-align: middle;
+    }
+
+    .contact-privacy {
+        margin-top: 1.25rem;
+        text-align: center;
+        font-size: 0.7rem;
+        color: #ffffff;
+        line-height: 1.5;
     }
 }
 
@@ -534,6 +1017,10 @@
     --color-pink: var(----pink);
     --color-green: var(----green);
     --color-foreground-muted: var(----foreground-muted);
+}
+
+@keyframes contact-spin {
+    to { transform: rotate(360deg); }
 }
 
 @keyframes ripple-flash {

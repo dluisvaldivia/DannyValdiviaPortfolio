@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import CardsList from '../components/cardList';
 import linkedinIcon from '../../assets/linkedin.svg';
 import githubIcon from '../../assets/github-light.svg';
 import calendlyIcon from '../../assets/calendly.svg';
+import { LuExternalLink } from 'react-icons/lu';
 import { useTranslation } from 'react-i18next';
+import emailjs from '@emailjs/browser';
 import laptopBg from '../../assets/image-of-laptop-screen-with-computer-code.webp';
 import DataGridHero from '../../components/data-grid-hero';
 
@@ -17,7 +19,7 @@ const fadeUp = {
   visible: (i = 0) => ({
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, delay: i * 0.12, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] },
   }),
 };
 
@@ -31,14 +33,6 @@ const socialLinks = [
     sub: 'Professional profile',
   },
   {
-    href: 'https://github.com/dluisvaldivia',
-    label: "Danny's GitHub",
-    icon: githubIcon,
-    alt: 'GitHub',
-    title: 'GitHub',
-    sub: 'Open source work',
-  },
-  {
     href: 'https://calendly.com/dluis-valdivia/30min',
     label: 'Schedule time with Danny',
     icon: calendlyIcon,
@@ -49,8 +43,43 @@ const socialLinks = [
   },
 ];
 
+type FormStatus = 'idle' | 'loading' | 'success' | 'error';
+
 export default function Home() {
   const { t } = useTranslation();
+
+  const [formStatus, setFormStatus] = useState<FormStatus>('idle');
+  const [formValues, setFormValues] = useState({ name: '', email: '', message: '' });
+
+  const handleFieldChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormValues(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (formStatus === 'loading') return;
+    setFormStatus('loading');
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        {
+          name: formValues.name,
+          email: formValues.email,
+          message: formValues.message,
+        },
+        { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
+      );
+      setFormStatus('success');
+      setFormValues({ name: '', email: '', message: '' });
+      setTimeout(() => setFormStatus('idle'), 6000);
+    } catch (err) {
+      console.error('EmailJS error:', err);
+      setFormStatus('error');
+      setTimeout(() => setFormStatus('idle'), 6000);
+    }
+  };
 
   const openCalendly = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -73,8 +102,7 @@ export default function Home() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.8 }}
-        className="mb-14"
-        style={{ borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)' }}
+        style={{ borderRadius: '6px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.07)', marginBottom: '2rem' }}
       >
         <DataGridHero
           rows={22}
@@ -93,7 +121,7 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="h1hero gradient-text font-bold tracking-tight mb-5 text-left w-fit mx-10 px-10"
+            className="h1hero gradient-text font-bold tracking-tight mb-8 text-left w-fit mx-2 px-4 md:mx-10 md:px-10"
             style={{ fontFamily: "'Zen Dots', sans-serif", textTransform: 'uppercase' }}
           >
             {t('hero.name')}
@@ -112,7 +140,7 @@ export default function Home() {
         </DataGridHero>
       </motion.div>
 
-      <div className="shimmer-line mb-14" />
+      <div className="shimmer-line" />
 
       {/* ── PROJECTS ── */}
       <motion.section
@@ -151,101 +179,138 @@ export default function Home() {
           >
             {t('headings.projects')}
           </motion.h2>
-          <div className="shimmer-line mb-6" />
+          <div className="shimmer-line" />
           <CardsList />
+          <div className="flex justify-center mt-10 my-5">
+            <a
+              href="https://github.com/dluisvaldivia"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Danny's GitHub — open source work"
+              className="button-primary cursor-pointer no-underline flex items-center gap-3 text-base px-8 py-4"
+            >
+              <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
+              View more on GitHub
+              <LuExternalLink className="w-5 h-5" />
+            </a>
+          </div>
         </div>
       </motion.section>
 
-      <div className="shimmer-line mb-14" />
+      <div className="shimmer-line" />
 
       {/* ── CONTACT ── */}
       <motion.section
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: '-60px' }}
-        className="mb-8"
+        className="contact-section mb-8"
+        aria-labelledby="contact"
       >
-        <motion.h2
-          variants={fadeUp}
-          id="contact"
-          className="text-white mb-2"
-          style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
-        >
-          {t('headings.contact')}
-        </motion.h2>
-        <div className="shimmer-line mb-10" />
+        <div className="contact-bg-glow" aria-hidden="true" />
 
-        <div className="flex justify-center">
-          <motion.div variants={fadeUp} custom={1} className="w-full md:w-[560px]">
-            <form target="_blank" action="https://formsubmit.co/dluis.valdivia@gmail.com" method="POST">
-              <div className="flex flex-col sm:flex-row gap-4 mb-4">
-                <label htmlFor="contact-name" className="sr-only">Your Name</label>
-                <input
-                  id="contact-name"
-                  type="text"
-                  name="name"
-                  placeholder="Your Name"
+        <div className="contact-inner">
+          <motion.div variants={fadeUp} className="contact-heading-block">
+            <p className="contact-eyebrow">Let's build something</p>
+            <h2 id="contact" className="contact-heading">{t('headings.contact')}</h2>
+          </motion.div>
+
+          <div className="shimmer-line" />
+
+          <motion.div variants={fadeUp} custom={1} className="contact-form-card">
+            <form onSubmit={handleContactSubmit} noValidate aria-label="Contact form">
+              <div className="contact-fields-row">
+                <div className="contact-field-group">
+                  <label htmlFor="contact-name" className="contact-label">Your Name</label>
+                  <input
+                    id="contact-name"
+                    type="text"
+                    name="name"
+                    placeholder="Jane Smith"
+                    required
+                    autoComplete="name"
+                    value={formValues.name}
+                    onChange={handleFieldChange}
+                    disabled={formStatus === 'loading' || formStatus === 'success'}
+                    className="contact-input"
+                  />
+                </div>
+                <div className="contact-field-group">
+                  <label htmlFor="contact-email" className="contact-label">Email Address</label>
+                  <input
+                    id="contact-email"
+                    type="email"
+                    name="email"
+                    placeholder="jane@example.com"
+                    required
+                    autoComplete="email"
+                    value={formValues.email}
+                    onChange={handleFieldChange}
+                    disabled={formStatus === 'loading' || formStatus === 'success'}
+                    className="contact-input"
+                  />
+                </div>
+              </div>
+
+              <div className="contact-field-group">
+                <label htmlFor="contact-message" className="contact-label">Your Message</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  placeholder="Tell me about your project or question..."
+                  rows={7}
                   required
-                  style={{
-                    flex: 1, padding: '12px 16px', borderRadius: '4px',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.09)',
-                    color: '#e8e8f0', outline: 'none',
-                  }}
-                  onFocus={e => { e.currentTarget.style.borderColor = '#00674F'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,103,79,0.15)'; }}
-                  onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)'; e.currentTarget.style.boxShadow = 'none'; }}
-                />
-                <label htmlFor="contact-email" className="sr-only">Email Address</label>
-                <input
-                  id="contact-email"
-                  type="email"
-                  name="email"
-                  placeholder="Email Address"
-                  required
-                  style={{
-                    flex: 1, padding: '12px 16px', borderRadius: '4px',
-                    background: 'rgba(255,255,255,0.04)',
-                    border: '1px solid rgba(255,255,255,0.09)',
-                    color: '#e8e8f0', outline: 'none',
-                  }}
-                  onFocus={e => { e.currentTarget.style.borderColor = '#00674F'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,103,79,0.15)'; }}
-                  onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)'; e.currentTarget.style.boxShadow = 'none'; }}
+                  value={formValues.message}
+                  onChange={handleFieldChange}
+                  disabled={formStatus === 'loading' || formStatus === 'success'}
+                  className="contact-input contact-textarea"
                 />
               </div>
-              <label htmlFor="contact-message" className="sr-only">Your Message</label>
-              <textarea
-                id="contact-message"
-                name="message"
-                placeholder="Your Message"
-                rows={7}
-                required
-                style={{
-                  width: '100%', padding: '12px 16px', borderRadius: '4px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(255,255,255,0.09)',
-                  color: '#e8e8f0', resize: 'vertical', outline: 'none',
-                  marginBottom: '16px',
-                }}
-                onFocus={e => { e.currentTarget.style.borderColor = '#00674F'; e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,103,79,0.15)'; }}
-                onBlur={e => { e.currentTarget.style.borderColor = 'rgba(255,255,255,0.09)'; e.currentTarget.style.boxShadow = 'none'; }}
-              />
+
+              {formStatus === 'success' && (
+                <motion.div
+                  role="status"
+                  aria-live="polite"
+                  className="contact-feedback contact-feedback--success"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <span aria-hidden="true">✓</span> Message sent! I'll be in touch soon.
+                </motion.div>
+              )}
+
+              {formStatus === 'error' && (
+                <motion.div
+                  role="alert"
+                  aria-live="assertive"
+                  className="contact-feedback contact-feedback--error"
+                  initial={{ opacity: 0, y: -8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.35 }}
+                >
+                  <span aria-hidden="true">⚠</span> Something went wrong. Please try again or email me directly.
+                </motion.div>
+              )}
+
               <button
                 type="submit"
-                className="w-full py-3 px-4 font-semibold text-sm uppercase tracking-widest transition-all duration-200"
-                style={{
-                  background: 'linear-gradient(135deg, #00674F, #2222F7)',
-                  color: '#fff',
-                  border: 'none',
-                  borderRadius: '4px',
-                  boxShadow: '0 0 30px rgba(0,103,79,0.3)',
-                }}
-                onMouseEnter={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 40px rgba(34,34,247,0.45)'; }}
-                onMouseLeave={e => { (e.currentTarget as HTMLButtonElement).style.boxShadow = '0 0 30px rgba(0,103,79,0.3)'; }}
+                disabled={formStatus === 'loading' || formStatus === 'success'}
+                className="contact-submit"
+                aria-label={
+                  formStatus === 'loading' ? 'Sending message...' :
+                  formStatus === 'success' ? 'Message sent' : 'Send message'
+                }
               >
-                Send Message
+                {formStatus === 'loading'
+                  ? <span className="contact-spinner" aria-hidden="true" />
+                  : formStatus === 'success'
+                  ? 'Sent!'
+                  : 'Send Message'}
               </button>
             </form>
-            <p className="mt-4 text-center text-xs" style={{ color: '#ffffff' }}>
+
+            <p className="contact-privacy">
               Your data is used solely to respond to your message and will never be shared with third parties.
             </p>
           </motion.div>
