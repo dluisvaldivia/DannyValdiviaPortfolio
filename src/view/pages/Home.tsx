@@ -26,50 +26,18 @@ const fadeUp = {
 };
 
 type SocialLink = {
+  key: 'linkedin' | 'github' | 'email' | 'calendly';
   href: string;
-  label: string;
   icon?: string;
   IconComp?: IconType;
-  alt: string;
-  title: string;
-  sub: string;
   isCalendly?: boolean;
 };
 
 const socialLinks: SocialLink[] = [
-  {
-    href: 'https://www.linkedin.com/in/dannyvaldivia/',
-    label: "Danny's LinkedIn",
-    icon: linkedinIcon,
-    alt: 'LinkedIn',
-    title: 'LinkedIn',
-    sub: 'Professional profile',
-  },
-  {
-    href: 'https://github.com/dluisvaldivia',
-    label: "Danny's GitHub",
-    icon: githubIcon,
-    alt: 'GitHub',
-    title: 'GitHub',
-    sub: 'Code & projects',
-  },
-  {
-    href: 'mailto:dluis.valdivia@gmail.com',
-    label: 'Email Danny',
-    IconComp: LuMail,
-    alt: 'Email',
-    title: 'Email',
-    sub: 'dluis.valdivia@gmail.com',
-  },
-  {
-    href: 'https://calendly.com/dluis-valdivia/30min',
-    label: 'Schedule time with Danny',
-    icon: calendlyIcon,
-    alt: 'Calendly',
-    title: 'Calendly',
-    sub: 'Book a 30-min call',
-    isCalendly: true,
-  },
+  { key: 'linkedin', href: 'https://www.linkedin.com/in/dannyvaldivia/', icon: linkedinIcon },
+  { key: 'github', href: 'https://github.com/dluisvaldivia', icon: githubIcon },
+  { key: 'email', href: 'mailto:dluis.valdivia@gmail.com', IconComp: LuMail },
+  { key: 'calendly', href: 'https://calendly.com/dluis-valdivia/30min', icon: calendlyIcon, isCalendly: true },
 ];
 
 type FormStatus = 'idle' | 'loading' | 'success' | 'error';
@@ -248,11 +216,11 @@ export default function Home() {
               href="https://github.com/dluisvaldivia"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Danny's GitHub — open source work"
+              aria-label={t('projects.github_cta_aria')}
               className="button-primary cursor-pointer no-underline flex items-center gap-3 text-base px-8 py-4"
             >
               <img src={githubIcon} alt="GitHub" className="w-6 h-6" />
-              View more on GitHub
+              {t('projects.github_cta')}
               <LuExternalLink className="w-5 h-5" />
             </a>
           </div>
@@ -273,22 +241,22 @@ export default function Home() {
 
         <div className="contact-inner">
           <motion.div variants={fadeUp} className="contact-heading-block">
-            <p className="contact-eyebrow">Let's build something</p>
+            <p className="contact-eyebrow">{t('contact.eyebrow')}</p>
             <h2 id="contact" className="contact-heading">{t('headings.contact')}</h2>
           </motion.div>
 
           <div className="shimmer-line" />
 
           <motion.div variants={fadeUp} custom={1} className="contact-form-card">
-            <form onSubmit={handleContactSubmit} noValidate aria-label="Contact form">
+            <form onSubmit={handleContactSubmit} noValidate aria-label={t('contact.form_aria')}>
               <div className="contact-fields-row">
                 <div className="contact-field-group">
-                  <label htmlFor="contact-name" className="contact-label">Your Name</label>
+                  <label htmlFor="contact-name" className="contact-label">{t('contact.name_label')}</label>
                   <input
                     id="contact-name"
                     type="text"
                     name="name"
-                    placeholder="Jane Smith"
+                    placeholder={t('contact.name_placeholder')}
                     required
                     autoComplete="name"
                     value={formValues.name}
@@ -298,12 +266,12 @@ export default function Home() {
                   />
                 </div>
                 <div className="contact-field-group">
-                  <label htmlFor="contact-email" className="contact-label">Email Address</label>
+                  <label htmlFor="contact-email" className="contact-label">{t('contact.email_label')}</label>
                   <input
                     id="contact-email"
                     type="email"
                     name="email"
-                    placeholder="jane@example.com"
+                    placeholder={t('contact.email_placeholder')}
                     required
                     autoComplete="email"
                     value={formValues.email}
@@ -315,11 +283,11 @@ export default function Home() {
               </div>
 
               <div className="contact-field-group">
-                <label htmlFor="contact-message" className="contact-label">Your Message</label>
+                <label htmlFor="contact-message" className="contact-label">{t('contact.message_label')}</label>
                 <textarea
                   id="contact-message"
                   name="message"
-                  placeholder="Tell me about your project or question..."
+                  placeholder={t('contact.message_placeholder')}
                   rows={7}
                   required
                   value={formValues.message}
@@ -338,7 +306,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <span aria-hidden="true">✓</span> Message sent! I'll be in touch soon.
+                  <span aria-hidden="true">✓</span> {t('contact.success')}
                 </motion.div>
               )}
 
@@ -351,7 +319,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.35 }}
                 >
-                  <span aria-hidden="true">⚠</span> Something went wrong. Please try again or email me directly.
+                  <span aria-hidden="true">⚠</span> {t('contact.error')}
                 </motion.div>
               )}
 
@@ -360,20 +328,20 @@ export default function Home() {
                 disabled={formStatus === 'loading' || formStatus === 'success'}
                 className="contact-submit"
                 aria-label={
-                  formStatus === 'loading' ? 'Sending message...' :
-                  formStatus === 'success' ? 'Message sent' : 'Send message'
+                  formStatus === 'loading' ? t('contact.sending') :
+                  formStatus === 'success' ? t('contact.sent_aria') : t('contact.send')
                 }
               >
                 {formStatus === 'loading'
                   ? <span className="contact-spinner" aria-hidden="true" />
                   : formStatus === 'success'
-                  ? 'Sent!'
-                  : 'Send Message'}
+                  ? t('contact.sent')
+                  : t('contact.send')}
               </button>
             </form>
 
             <p className="contact-privacy">
-              Your data is used solely to respond to your message and will never be shared with third parties.
+              {t('contact.privacy')}
             </p>
           </motion.div>
         </div>
@@ -384,16 +352,16 @@ export default function Home() {
             className="text-center text-xs uppercase tracking-widest mb-8"
             style={{ color: '#ffffff' }}
           >
-            or find me on
+            {t('social.find_me')}
           </p>
           <div className="flex flex-wrap justify-center gap-5">
             {socialLinks.map((s, i) => (
               <motion.a
-                key={s.title}
+                key={s.key}
                 href={s.href}
                 target={s.href.startsWith('mailto:') ? undefined : '_blank'}
                 rel={s.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
-                aria-label={s.label}
+                aria-label={t(`social.${s.key}_label`)}
                 onClick={s.isCalendly ? openCalendly : undefined}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -419,11 +387,11 @@ export default function Home() {
                 {s.IconComp ? (
                   <s.IconComp aria-hidden="true" className="w-9 h-9 shrink-0" style={{ color: '#00a880' }} />
                 ) : (
-                  <img src={s.icon} alt={s.alt} className="w-9 h-9 shrink-0" />
+                  <img src={s.icon} alt={t(`social.${s.key}_title`)} className="w-9 h-9 shrink-0" />
                 )}
                 <div>
-                  <p className="font-bold text-white text-sm">{s.title}</p>
-                  <p className="text-xs" style={{ color: 'rgba(232,232,240,0.45)' }}>{s.sub}</p>
+                  <p className="font-bold text-white text-sm">{t(`social.${s.key}_title`)}</p>
+                  <p className="text-xs" style={{ color: 'rgba(232,232,240,0.45)' }}>{t(`social.${s.key}_sub`)}</p>
                 </div>
               </motion.a>
             ))}

@@ -32,7 +32,45 @@ const resources = {
                 "projects": "Work & Projects",
                 "contact": "Contact me"
             },
+            "projects": {
+                "github_cta": "View more on GitHub",
+                "github_cta_aria": "Danny's GitHub — open source work"
+            },
+            "contact": {
+                "eyebrow": "Let's build something",
+                "form_aria": "Contact form",
+                "name_label": "Your Name",
+                "name_placeholder": "Jane Smith",
+                "email_label": "Email Address",
+                "email_placeholder": "jane@example.com",
+                "message_label": "Your Message",
+                "message_placeholder": "Tell me about your project or question...",
+                "send": "Send Message",
+                "sending": "Sending message...",
+                "sent": "Sent!",
+                "sent_aria": "Message sent",
+                "success": "Message sent! I'll be in touch soon.",
+                "error": "Something went wrong. Please try again or email me directly.",
+                "privacy": "Your data is used solely to respond to your message and will never be shared with third parties."
+            },
+            "social": {
+                "find_me": "or find me on",
+                "linkedin_title": "LinkedIn",
+                "linkedin_sub": "Professional profile",
+                "linkedin_label": "Danny's LinkedIn",
+                "github_title": "GitHub",
+                "github_sub": "Code & projects",
+                "github_label": "Danny's GitHub",
+                "email_title": "Email",
+                "email_sub": "dluis.valdivia@gmail.com",
+                "email_label": "Email Danny",
+                "calendly_title": "Calendly",
+                "calendly_sub": "Book a 30-min call",
+                "calendly_label": "Schedule time with Danny"
+            },
             "cards": {
+                "visit": "Visit {{title}}",
+                "visit_aria": "Visit {{title}}, opens in new tab",
                 "1": { "title": "Bloom", "description": "Growth Hacking Teams Platform that connects freelancers and companies to form high-performing collaborative teams. The platform enables skill-based team formation, project collaboration, and transparent performance tracking.", "status": "Pre-MVP — login unavailable" },
                 "2": { "title": "The Yoga Game", "description": "Colorful and engaging yoga app for kids. Features multiple game modes, pose timers, and fun countdown sounds to keep children motivated and engaged." },
                 "3": { "title": "SO DIVERGENT", "description": "Interactive site simulating the limitations and strengths of neurodivergent individuals." },
@@ -103,7 +141,45 @@ const resources = {
                 "projects": "Proyectos",
                 "contact": "Contáctame"
             },
+            "projects": {
+                "github_cta": "Ver más en GitHub",
+                "github_cta_aria": "GitHub de Danny — proyectos open source"
+            },
+            "contact": {
+                "eyebrow": "Construyamos algo",
+                "form_aria": "Formulario de contacto",
+                "name_label": "Tu nombre",
+                "name_placeholder": "María García",
+                "email_label": "Correo electrónico",
+                "email_placeholder": "maria@ejemplo.com",
+                "message_label": "Tu mensaje",
+                "message_placeholder": "Cuéntame sobre tu proyecto o consulta...",
+                "send": "Enviar mensaje",
+                "sending": "Enviando mensaje...",
+                "sent": "¡Enviado!",
+                "sent_aria": "Mensaje enviado",
+                "success": "¡Mensaje enviado! Te responderé pronto.",
+                "error": "Algo salió mal. Inténtalo de nuevo o escríbeme directamente por correo.",
+                "privacy": "Tus datos se usan únicamente para responder a tu mensaje y nunca se compartirán con terceros."
+            },
+            "social": {
+                "find_me": "o encuéntrame en",
+                "linkedin_title": "LinkedIn",
+                "linkedin_sub": "Perfil profesional",
+                "linkedin_label": "LinkedIn de Danny",
+                "github_title": "GitHub",
+                "github_sub": "Código y proyectos",
+                "github_label": "GitHub de Danny",
+                "email_title": "Correo",
+                "email_sub": "dluis.valdivia@gmail.com",
+                "email_label": "Escríbeme un correo",
+                "calendly_title": "Calendly",
+                "calendly_sub": "Reserva una llamada de 30 min",
+                "calendly_label": "Agenda una llamada con Danny"
+            },
             "cards": {
+                "visit": "Visitar {{title}}",
+                "visit_aria": "Visitar {{title}}, se abre en una pestaña nueva",
                 "1": { "title": "Bloom", "description": "Plataforma de equipos de Growth Hacking que conecta freelancers y empresas para formar equipos colaborativos de alto rendimiento. La plataforma permite la formación de equipos basada en habilidades, la colaboración en proyectos y el seguimiento transparente del rendimiento.", "status": "Pre-MVP — inicio de sesión no disponible" },
                 "2": { "title": "The Yoga Game", "description": "App de yoga colorida y dinámica para niños. Incluye varios modos de juego, temporizadores de posturas y divertidos sonidos de cuenta regresiva para mantener a los niños motivados y entretenidos." },
                 "3": { "title": "SO DIVERGENT", "description": "Sitio interactivo que simula las limitaciones y fortalezas de personas neurodivergentes." },
@@ -158,5 +234,12 @@ i18n
             escapeValue: false, // react already safes from xss
         }
     });
+
+// Keep <html lang> in sync with the active language (WCAG 3.1.1)
+const syncHtmlLang = (lng: string) => {
+    document.documentElement.lang = lng.split('-')[0];
+};
+syncHtmlLang(i18n.language || 'en');
+i18n.on('languageChanged', syncHtmlLang);
 
 export default i18n;

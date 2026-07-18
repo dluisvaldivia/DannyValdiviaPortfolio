@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import { LuExternalLink } from 'react-icons/lu';
+import { useTranslation } from 'react-i18next';
 
 interface CardProps {
   title: string;
@@ -10,6 +11,7 @@ interface CardProps {
 }
 
 export default function Card({ title, description, link, image, status }: CardProps) {
+  const { t } = useTranslation();
   const titleId = `card-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
   return (
     <motion.article
@@ -31,10 +33,10 @@ export default function Card({ title, description, link, image, status }: CardPr
             href={link}
             target="_blank"
             className="button-primary mt-auto relative cursor-pointer no-underline"
-            aria-label={`Visit ${title}, opens in new tab`}
+            aria-label={t('cards.visit_aria', { title })}
             rel="noopener noreferrer"
           >
-            Visit {title}
+            {t('cards.visit', { title })}
             <LuExternalLink className="absolute top-2 right-2" />
           </a>
         )}
