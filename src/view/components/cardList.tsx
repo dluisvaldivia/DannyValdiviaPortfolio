@@ -13,6 +13,8 @@ const CardsList = () => {
           title={t(`cards.${card.id}.title`)}
           description={t(`cards.${card.id}.description`)}
           link={card.link}
+          image={card.thumbnail}
+          status={t(`cards.${card.id}.status`, { defaultValue: '' }) || undefined}
         />
       ))}
     </div>

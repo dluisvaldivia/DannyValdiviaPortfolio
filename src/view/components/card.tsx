@@ -5,9 +5,11 @@ interface CardProps {
   title: string;
   description: string;
   link?: string;
+  image?: string;
+  status?: string;
 }
 
-export default function Card({ title, description, link }: CardProps) {
+export default function Card({ title, description, link, image, status }: CardProps) {
   const titleId = `card-title-${title.toLowerCase().replace(/\s+/g, '-')}`;
   return (
     <motion.article
@@ -17,8 +19,12 @@ export default function Card({ title, description, link }: CardProps) {
       whileHover={{ y: -6 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
     >
+      {image && (
+        <img className="card__image" src={image} alt={`${title} app preview`} loading="lazy" />
+      )}
       <div className="card__content flex flex-col h-full">
         <h2 id={titleId} className="card__title">{title}</h2>
+        {status && <span className="card__status">{status}</span>}
         <p className="card__description flex-1 mb-2">{description}</p>
         {link && (
           <a

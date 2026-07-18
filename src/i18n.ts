@@ -31,10 +31,11 @@ const resources = {
                 "contact": "Contact me"
             },
             "cards": {
-                "1": { "title": "Bloom", "description": "Growth Hacking Teams Platform that connects freelancers and companies to form high-performing collaborative teams. The platform enables skill-based team formation, project collaboration, and transparent performance tracking." },
-                "2": { "title": "YogaBuddy", "description": "Colorful and engaging yoga app for kids. Features multiple game modes, pose timers, and fun countdown sounds to keep children motivated and engaged." },
+                "1": { "title": "Bloom", "description": "Growth Hacking Teams Platform that connects freelancers and companies to form high-performing collaborative teams. The platform enables skill-based team formation, project collaboration, and transparent performance tracking.", "status": "Pre-MVP — not yet accessible" },
+                "2": { "title": "The Yoga Game", "description": "Colorful and engaging yoga app for kids. Features multiple game modes, pose timers, and fun countdown sounds to keep children motivated and engaged." },
                 "3": { "title": "SO DIVERGENT", "description": "Interactive site simulating the limitations and strengths of neurodivergent individuals." },
-                "4": { "title": "ExpenseVue", "description": "Expense management application with integration to banking data." }
+                "4": { "title": "ExpenseVue", "description": "Expense management application with integration to banking data." },
+                "5": { "title": "TuneBuddy", "description": "Elegant instrument tuning app with standard tuning presets for guitar and ukulele, plus a built-in metronome tool." }
             },
             "accessibility_checker": {
                 "title": "Accessibility Checker",
@@ -99,10 +100,11 @@ const resources = {
                 "contact": "Contáctame"
             },
             "cards": {
-                "1": { "title": "Bloom", "description": "Plataforma de equipos de Growth Hacking que conecta freelancers y empresas para formar equipos colaborativos de alto rendimiento. La plataforma permite la formación de equipos basada en habilidades, la colaboración en proyectos y el seguimiento transparente del rendimiento." },
-                "2": { "title": "YogaBuddy", "description": "App de yoga colorida y dinámica para niños. Incluye varios modos de juego, temporizadores de posturas y divertidos sonidos de cuenta regresiva para mantener a los niños motivados y entretenidos." },
+                "1": { "title": "Bloom", "description": "Plataforma de equipos de Growth Hacking que conecta freelancers y empresas para formar equipos colaborativos de alto rendimiento. La plataforma permite la formación de equipos basada en habilidades, la colaboración en proyectos y el seguimiento transparente del rendimiento.", "status": "Pre-MVP — aún no accesible" },
+                "2": { "title": "The Yoga Game", "description": "App de yoga colorida y dinámica para niños. Incluye varios modos de juego, temporizadores de posturas y divertidos sonidos de cuenta regresiva para mantener a los niños motivados y entretenidos." },
                 "3": { "title": "SO DIVERGENT", "description": "Sitio interactivo que simula las limitaciones y fortalezas de personas neurodivergentes." },
-                "4": { "title": "ExpenseVue", "description": "Aplicación de gestión de gastos con integración a datos bancarios." }
+                "4": { "title": "ExpenseVue", "description": "Aplicación de gestión de gastos con integración a datos bancarios." },
+                "5": { "title": "TuneBuddy", "description": "Elegante app de afinación de instrumentos con presets de afinación estándar para guitarra y ukelele, además de un metrónomo incorporado." }
             },
             "accessibility_checker": {
                 "title": "Comprobador de Accesibilidad",

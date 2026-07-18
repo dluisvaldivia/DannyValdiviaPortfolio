@@ -1,7 +1,7 @@
 import { Editor } from '@tiptap/react';
 import {
   FaBold, FaItalic, FaStrikethrough,
-  FaHeading, FaListUl, FaListOl, FaQuoteLeft,
+  FaListUl, FaListOl, FaQuoteLeft,
   FaCode, FaLink, FaUnlink, FaMinus, FaImage,
   FaUndo, FaRedo,
 } from 'react-icons/fa';

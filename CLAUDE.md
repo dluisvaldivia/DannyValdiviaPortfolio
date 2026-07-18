@@ -78,7 +78,7 @@ BloomIcon.ico, css-logo.png, html-logo.png, javascript-logo.png
 - **Admin URL:** `/admin` locally at `localhost:5173/admin`, live at `dluisvaldivia.github.io/DVPortfolio/admin`
 
 ## Projects Section (`src/view/components/card.tsx` + `src/models/cardsData.ts`)
-- Active projects: Bloom, YogaBuddy (was "The Yoga Game"), ExpenseVue — SO DIVERGENT removed
+- Active projects: Bloom, The Yoga Game, ExpenseVue — SO DIVERGENT removed
 - Project card button is an `<a>` with `button-primary` class (not a nested `<button>`) — fixes pointer cursor and click area
 - `LuExternalLink` icon (react-icons/lu) sits `absolute top-2 right-2` inside the button
 - `button-primary:focus-visible` uses a 2px `#2222F7` outline for keyboard nav visibility

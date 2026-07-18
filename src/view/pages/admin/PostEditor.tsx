@@ -63,8 +63,7 @@ const baseInput: React.CSSProperties = {
   boxSizing: 'border-box',
 };
 
-const focusIn: React.CSSProperties  = { borderColor: '#00674F', boxShadow: '0 0 0 3px rgba(0,103,79,0.15)' };
-const focusOut: React.CSSProperties = { borderColor: 'rgba(255,255,255,0.09)', boxShadow: 'none' };
+const focusIn: React.CSSProperties = { borderColor: '#00674F', boxShadow: '0 0 0 3px rgba(0,103,79,0.15)' };
 
 function Field({
   label,
