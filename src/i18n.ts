@@ -15,10 +15,11 @@ const resources = {
             },
             "hero": {
                 "name": "Danny Valdivia",
-                "tagline1": "Full Stack Developer | UI/UX & Accessibility Expert | AI-Accelerated Solutions | Business Analyst",
+                "tagline1": "Full Stack Developer — UI/UX & Accessibility (WCAG)",
                 "tagline2": ""
             },
             "about": {
+                "bio": "I'm a UI/UX web developer at Bloom Growth Solutions, where I've built the front end of a multi-portal B2B SaaS platform as the sole frontend developer — from Figma prototypes to a WCAG 2.1 AA production interface. Based in Málaga, Spain, working in English and Spanish.",
                 "reducing_friction_title": "Reducing Friction",
                 "reducing_friction_desc": "Translating complex business logic into intuitive, high-performance digital systems.",
                 "universal_design_title": "Universal Design",
@@ -27,6 +28,7 @@ const resources = {
                 "strategic_optimization_desc": "Trimming technical and process \"noise\" to maximize project efficacy and team velocity."
             },
             "headings": {
+                "about": "About me",
                 "projects": "Work & Projects",
                 "contact": "Contact me"
             },
@@ -84,10 +86,11 @@ const resources = {
             },
             "hero": {
                 "name": "Danny Valdivia",
-                "tagline1": "Desarrollador Full Stack | Experto en UI/UX & Accesibilidad | Soluciones con IA | Analista de Negocio",
+                "tagline1": "Desarrollador Full Stack — UI/UX y Accesibilidad (WCAG)",
                 "tagline2": ""
             },
             "about": {
+                "bio": "Soy desarrollador web UI/UX en Bloom Growth Solutions, donde he construido el front end de una plataforma SaaS B2B multi-portal como único desarrollador frontend — desde los prototipos en Figma hasta una interfaz en producción conforme a WCAG 2.1 AA. Resido en Málaga, España, y trabajo en inglés y español.",
                 "reducing_friction_title": "Reduciendo la Fricción",
                 "reducing_friction_desc": "Traduciendo lógica de negocio compleja en sistemas digitales intuitivos y de alto rendimiento.",
                 "universal_design_title": "Diseño Universal",
@@ -96,6 +99,7 @@ const resources = {
                 "strategic_optimization_desc": "Eliminando el \"ruido\" técnico y de procesos para maximizar la eficacia del proyecto y la velocidad del equipo."
             },
             "headings": {
+                "about": "Sobre mí",
                 "projects": "Proyectos",
                 "contact": "Contáctame"
             },

@@ -4,7 +4,8 @@ import CardsList from '../components/cardList';
 import linkedinIcon from '../../assets/linkedin.svg';
 import githubIcon from '../../assets/github-light.svg';
 import calendlyIcon from '../../assets/calendly.svg';
-import { LuExternalLink } from 'react-icons/lu';
+import { LuExternalLink, LuMail } from 'react-icons/lu';
+import type { IconType } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import laptopBg from '../../assets/image-of-laptop-screen-with-computer-code.webp';
@@ -24,7 +25,18 @@ const fadeUp = {
   }),
 };
 
-const socialLinks = [
+type SocialLink = {
+  href: string;
+  label: string;
+  icon?: string;
+  IconComp?: IconType;
+  alt: string;
+  title: string;
+  sub: string;
+  isCalendly?: boolean;
+};
+
+const socialLinks: SocialLink[] = [
   {
     href: 'https://www.linkedin.com/in/dannyvaldivia/',
     label: "Danny's LinkedIn",
@@ -32,6 +44,22 @@ const socialLinks = [
     alt: 'LinkedIn',
     title: 'LinkedIn',
     sub: 'Professional profile',
+  },
+  {
+    href: 'https://github.com/dluisvaldivia',
+    label: "Danny's GitHub",
+    icon: githubIcon,
+    alt: 'GitHub',
+    title: 'GitHub',
+    sub: 'Code & projects',
+  },
+  {
+    href: 'mailto:dluis.valdivia@gmail.com',
+    label: 'Email Danny',
+    IconComp: LuMail,
+    alt: 'Email',
+    title: 'Email',
+    sub: 'dluis.valdivia@gmail.com',
   },
   {
     href: 'https://calendly.com/dluis-valdivia/30min',
@@ -141,6 +169,38 @@ export default function Home() {
 
         </DataGridHero>
       </motion.div>
+
+      <div className="shimmer-line" />
+
+      {/* ── ABOUT ── */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
+        className="mb-14 p-4 sm:p-6 md:p-8"
+        aria-labelledby="about"
+      >
+        <motion.h2
+          variants={fadeUp}
+          id="about"
+          className="text-white mb-2"
+          style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
+        >
+          {t('headings.about')}
+        </motion.h2>
+        <div className="shimmer-line" />
+        <motion.p variants={fadeUp} custom={1} className="about-bio">
+          {t('about.bio')}
+        </motion.p>
+        <div className="about-grid">
+          {(['reducing_friction', 'universal_design', 'strategic_optimization'] as const).map((key, i) => (
+            <motion.div key={key} variants={fadeUp} custom={i + 2} className="about-card">
+              <h3 className="about-card__title">{t(`about.${key}_title`)}</h3>
+              <p className="about-card__desc">{t(`about.${key}_desc`)}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.section>
 
       <div className="shimmer-line" />
 
@@ -331,8 +391,8 @@ export default function Home() {
               <motion.a
                 key={s.title}
                 href={s.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={s.href.startsWith('mailto:') ? undefined : '_blank'}
+                rel={s.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
                 aria-label={s.label}
                 onClick={s.isCalendly ? openCalendly : undefined}
                 initial={{ opacity: 0, y: 20 }}
@@ -356,7 +416,11 @@ export default function Home() {
                   (e.currentTarget as HTMLAnchorElement).style.boxShadow = 'none';
                 }}
               >
-                <img src={s.icon} alt={s.alt} className="w-9 h-9 shrink-0" />
+                {s.IconComp ? (
+                  <s.IconComp aria-hidden="true" className="w-9 h-9 shrink-0" style={{ color: '#00a880' }} />
+                ) : (
+                  <img src={s.icon} alt={s.alt} className="w-9 h-9 shrink-0" />
+                )}
                 <div>
                   <p className="font-bold text-white text-sm">{s.title}</p>
                   <p className="text-xs" style={{ color: 'rgba(232,232,240,0.45)' }}>{s.sub}</p>
