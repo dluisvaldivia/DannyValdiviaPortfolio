@@ -33,6 +33,9 @@ export default function DataGridHero({
   const gridRef = useRef<HTMLDivElement>(null);
   const cellsRef = useRef<HTMLDivElement[]>([]);
 
+  const prefersReducedMotion = () =>
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
   // Build grid cells
   useEffect(() => {
     const container = gridRef.current;
@@ -60,7 +63,7 @@ export default function DataGridHero({
   const triggerRipple = useCallback(
     (originRow: number, originCol: number) => {
       const cells = cellsRef.current;
-      if (!cells.length) return;
+      if (!cells.length || prefersReducedMotion()) return;
 
       cells.forEach((cell, i) => {
         const r = Math.floor(i / cols);
@@ -78,7 +81,7 @@ export default function DataGridHero({
 
   // Auto-ripple loop
   useEffect(() => {
-    if (!pulseEffect) return;
+    if (!pulseEffect || prefersReducedMotion()) return;
 
     let timeoutId: ReturnType<typeof setTimeout>;
 

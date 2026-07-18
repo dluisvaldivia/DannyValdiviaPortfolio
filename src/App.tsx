@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { MotionConfig } from 'framer-motion'
+import { useTranslation } from 'react-i18next'
 import Home from './view/pages/Home'
 import NotFound from './view/pages/NotFound'
 import Navbar from './view/components/Navbar';
@@ -15,27 +17,33 @@ import { getInitialTheme, setTheme } from './controllers/themeController'
 
 
 function App() {
+  const { t } = useTranslation();
   useEffect(() => { setTheme(getInitialTheme()) }, []);
 
 
   return (
-    <Router basename={import.meta.env.BASE_URL}>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/blog" element={<Blog />} />
-        <Route path="/blog/:slug" element={<BlogPost />} />
-        <Route path="/free-tools/accessibility-checker" element={<AccessibilityChecker />} />
-        <Route path="/admin" element={<AdminLogin />} />
-        <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
-        <Route path="/admin/post/new" element={<PrivateRoute><PostEditor /></PrivateRoute>} />
-        <Route path="/admin/post/:slug" element={<PrivateRoute><PostEditor /></PrivateRoute>} />
-        <Route path="*" element={<NotFound />} />
-      </Routes>
-      <BackToTop />
-      {/* <Footer /> */}
+    <MotionConfig reducedMotion="user">
+      <Router basename={import.meta.env.BASE_URL}>
+        <a className="skip-link" href="#main-content">{t('nav.skip')}</a>
+        <Navbar />
+        <main id="main-content">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:slug" element={<BlogPost />} />
+            <Route path="/free-tools/accessibility-checker" element={<AccessibilityChecker />} />
+            <Route path="/admin" element={<AdminLogin />} />
+            <Route path="/admin/dashboard" element={<PrivateRoute><AdminDashboard /></PrivateRoute>} />
+            <Route path="/admin/post/new" element={<PrivateRoute><PostEditor /></PrivateRoute>} />
+            <Route path="/admin/post/:slug" element={<PrivateRoute><PostEditor /></PrivateRoute>} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <BackToTop />
+        {/* <Footer /> */}
 
-    </Router>
+      </Router>
+    </MotionConfig>
   )
 }
 

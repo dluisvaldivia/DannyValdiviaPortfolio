@@ -11,7 +11,8 @@ const resources = {
                 "contact": "Contact",
                 "tools": "Tools",
                 "accessibility_check": "Accessibility Check",
-                "rates": "Rates"
+                "rates": "Rates",
+                "skip": "Skip to content"
             },
             "hero": {
                 "name": "Danny Valdivia",
@@ -120,7 +121,8 @@ const resources = {
                 "contact": "Contacto",
                 "tools": "Herramientas",
                 "accessibility_check": "Revisión de Accesibilidad",
-                "rates": "Tarifas"
+                "rates": "Tarifas",
+                "skip": "Saltar al contenido"
             },
             "hero": {
                 "name": "Danny Valdivia",

@@ -57,6 +57,7 @@ export default function Home() {
   const handleContactSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formStatus === 'loading') return;
+    if (!formValues.name.trim() || !formValues.email.trim() || !formValues.message.trim()) return;
     setFormStatus('loading');
     try {
       await emailjs.send(
@@ -80,13 +81,14 @@ export default function Home() {
   };
 
   const openCalendly = (e: React.MouseEvent) => {
+    if (!window.Calendly) return; // widget blocked/unavailable — follow the plain link instead
     e.preventDefault();
     window.Calendly.initPopupWidget({ url: 'https://calendly.com/dluis-valdivia/30min' });
   };
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') window.Calendly.closePopupWidget();
+      if (e.key === 'Escape') window.Calendly?.closePopupWidget();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
@@ -248,7 +250,7 @@ export default function Home() {
           <div className="shimmer-line" />
 
           <motion.div variants={fadeUp} custom={1} className="contact-form-card">
-            <form onSubmit={handleContactSubmit} noValidate aria-label={t('contact.form_aria')}>
+            <form onSubmit={handleContactSubmit} aria-label={t('contact.form_aria')}>
               <div className="contact-fields-row">
                 <div className="contact-field-group">
                   <label htmlFor="contact-name" className="contact-label">{t('contact.name_label')}</label>
@@ -391,7 +393,7 @@ export default function Home() {
                 )}
                 <div>
                   <p className="font-bold text-white text-sm">{t(`social.${s.key}_title`)}</p>
-                  <p className="text-xs" style={{ color: 'rgba(232,232,240,0.45)' }}>{t(`social.${s.key}_sub`)}</p>
+                  <p className="text-xs" style={{ color: 'rgba(232,232,240,0.7)' }}>{t(`social.${s.key}_sub`)}</p>
                 </div>
               </motion.a>
             ))}

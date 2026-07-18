@@ -16,7 +16,6 @@ export default function Card({ title, description, link, image, status }: CardPr
   return (
     <motion.article
       className="card"
-      tabIndex={0}
       aria-labelledby={titleId}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.25, ease: 'easeOut' }}
