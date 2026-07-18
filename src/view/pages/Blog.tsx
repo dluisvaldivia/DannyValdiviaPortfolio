@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { getAllPosts } from '../../controllers/blogController';
+import usePageTitle from '../../hooks/usePageTitle';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -20,6 +21,7 @@ function formatDate(iso: string) {
 }
 
 export default function Blog() {
+  usePageTitle('Blog');
   const sorted = getAllPosts(true).sort(
     (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
   );

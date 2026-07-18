@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { login, isAuthenticated } from '../../../controllers/authController';
+import usePageTitle from '../../../hooks/usePageTitle';
 
 const inputStyle: React.CSSProperties = {
   width: '100%',
@@ -51,6 +52,7 @@ function Field({
 }
 
 export default function AdminLogin() {
+  usePageTitle('Admin');
   const navigate = useNavigate();
   const [user, setUser] = useState('');
   const [pass, setPass] = useState('');

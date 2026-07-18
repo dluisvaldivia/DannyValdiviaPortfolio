@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import whatsappIcon from '../../assets/icons8-whatsapp.svg';
+import usePageTitle from '../../hooks/usePageTitle';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -22,6 +23,7 @@ const CATEGORY_META: Record<string, { label: string; description: string }> = {
 
 const AccessibilityChecker = () => {
     const { t } = useTranslation();
+    usePageTitle('Accessibility Checker');
     const [url, setUrl] = useState('');
     const [report, setReport] = useState<any>(null);
     const [loading, setLoading] = useState(false);

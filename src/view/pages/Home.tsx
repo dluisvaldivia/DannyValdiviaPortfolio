@@ -9,6 +9,7 @@ import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
 import laptopBg from '../../assets/image-of-laptop-screen-with-computer-code.webp';
 import DataGridHero from '../../components/data-grid-hero';
+import usePageTitle from '../../hooks/usePageTitle';
 
 declare global {
   interface Window { Calendly: any; }
@@ -47,6 +48,7 @@ type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 
 export default function Home() {
   const { t } = useTranslation();
+  usePageTitle();
 
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [formValues, setFormValues] = useState({ name: '', email: '', message: '' });

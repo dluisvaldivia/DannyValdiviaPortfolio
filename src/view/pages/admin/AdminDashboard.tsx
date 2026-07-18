@@ -5,12 +5,14 @@ import { FaPlus, FaEdit, FaTrash, FaSignOutAlt } from 'react-icons/fa';
 import { logout } from '../../../controllers/authController';
 import { getAllPosts, deletePost, isBuiltIn } from '../../../controllers/blogController';
 import { BlogPost } from '../../../models/blogData';
+import usePageTitle from '../../../hooks/usePageTitle';
 
 function formatDate(iso: string) {
   return new Date(iso).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
 export default function AdminDashboard() {
+  usePageTitle('Dashboard');
   const navigate = useNavigate();
   const [posts, setPosts] = useState<BlogPost[]>(() => getAllPosts());
   const [confirmSlug, setConfirmSlug] = useState<string | null>(null);

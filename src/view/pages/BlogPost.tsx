@@ -2,6 +2,7 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { FaArrowLeft } from 'react-icons/fa';
 import { getAllPosts } from '../../controllers/blogController';
+import usePageTitle from '../../hooks/usePageTitle';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 30 },
@@ -23,6 +24,7 @@ function formatDate(iso: string) {
 export default function BlogPost() {
   const { slug } = useParams<{ slug: string }>();
   const post = getAllPosts().find(p => p.slug === slug);
+  usePageTitle(post ? post.title : 'Blog');
 
   if (!post) return <Navigate to="/blog" replace />;
 

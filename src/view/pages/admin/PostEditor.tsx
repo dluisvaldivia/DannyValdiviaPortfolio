@@ -5,6 +5,7 @@ import { FaArrowLeft, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { savePost, getAllPosts, slugify, estimateReadTime } from '../../../controllers/blogController';
 import { BlogPost } from '../../../models/blogData';
 import RichEditor from '../../components/admin/RichEditor';
+import usePageTitle from '../../../hooks/usePageTitle';
 
 // ── Focused textarea (used for excerpt only) ─────────────────────────────────
 
@@ -120,6 +121,7 @@ function TextInput({
 // ── Main component ────────────────────────────────────────────────────────────
 
 export default function PostEditor() {
+  usePageTitle('Post Editor');
   const { slug: editSlug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
   const isNew = !editSlug;
