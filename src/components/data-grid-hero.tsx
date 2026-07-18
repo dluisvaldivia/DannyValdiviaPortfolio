@@ -65,14 +65,16 @@ export default function DataGridHero({
       const cells = cellsRef.current;
       if (!cells.length || prefersReducedMotion()) return;
 
+      cells.forEach((cell) => {
+        cell.style.animation = "none";
+      });
+      // single forced reflow (instead of one per cell) so the animation restart registers
+      void gridRef.current?.offsetWidth;
       cells.forEach((cell, i) => {
         const r = Math.floor(i / cols);
         const c = i % cols;
         const dist = Math.sqrt((r - originRow) ** 2 + (c - originCol) ** 2);
         const delay = dist * 0.06;
-
-        cell.style.animation = "none";
-        void cell.offsetWidth;
         cell.style.animation = `ripple-flash ${duration * 0.6}s ${delay.toFixed(3)}s ease-out forwards`;
       });
     },
