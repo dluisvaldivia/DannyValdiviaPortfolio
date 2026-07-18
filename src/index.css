@@ -740,6 +740,13 @@
         background: linear-gradient(90deg, transparent, rgba(0, 103, 79, 0.7), rgba(34, 34, 247, 0.7), transparent);
     }
 
+    /* Anchored sections clear the sticky navbar when scrolled to */
+    #about,
+    #projects,
+    #contact {
+        scroll-margin-top: 80px;
+    }
+
     /* ── Skip link (visible on keyboard focus only) ── */
     .skip-link {
         position: absolute;

@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import CardsList from '../components/cardList';
 import linkedinIcon from '../../assets/linkedin.svg';
@@ -45,6 +46,17 @@ type FormStatus = 'idle' | 'loading' | 'success' | 'error';
 export default function Home() {
   const { t } = useTranslation();
   usePageTitle();
+  const location = useLocation();
+
+  // Scroll to #projects / #contact when navigated to via a hash link
+  useEffect(() => {
+    if (!location.hash) return;
+    const el = document.getElementById(location.hash.slice(1));
+    if (!el) return;
+    const behavior: ScrollBehavior =
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+    requestAnimationFrame(() => el.scrollIntoView({ behavior }));
+  }, [location]);
 
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [formValues, setFormValues] = useState({ name: '', email: '', message: '' });

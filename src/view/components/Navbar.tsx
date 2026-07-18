@@ -19,8 +19,14 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const navLinks = [
+    { to: '/#projects', label: t('nav.projects') },
+    { to: '/#contact', label: t('nav.contact') },
     { to: '/free-tools/accessibility-checker', label: t('nav.accessibility_check') },
   ];
+
+  const handleNavClick = (to: string) => {
+    if (!to.includes('#')) window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -31,7 +37,7 @@ export default function Navbar() {
         </Link>
 
         {navLinks.map(link => (
-          <Link key={link.to} to={link.to} className="nav-item" onClick={() => window.scrollTo(0, 0)}>
+          <Link key={link.to} to={link.to} className="nav-item" onClick={() => handleNavClick(link.to)}>
             {link.label}
           </Link>
         ))}
@@ -107,7 +113,7 @@ export default function Navbar() {
                 key={link.to}
                 to={link.to}
                 className="nav-item"
-                onClick={() => window.scrollTo(0, 0)}
+                onClick={() => handleNavClick(link.to)}
               >
                 {link.label}
               </Link>
