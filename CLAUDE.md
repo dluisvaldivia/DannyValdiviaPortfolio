@@ -23,7 +23,6 @@ Danny Valdivia — Frontend/UX developer. Portfolio deployed to GitHub Pages at 
 | Path | Component |
 |------|-----------|
 | `/` | `Home.tsx` |
-| `/rates` | `Rates.tsx` |
 | `/free-tools/accessibility-checker` | `AccessibilityChecker.tsx` |
 | `/blog` | `Blog.tsx` — public listing (not in navbar) |
 | `/blog/:slug` | `BlogPost.tsx` — public post detail |
@@ -33,6 +32,8 @@ Danny Valdivia — Frontend/UX developer. Portfolio deployed to GitHub Pages at 
 | `/admin/post/:slug` | `PostEditor.tsx` (edit mode) — protected |
 | `*` | `NotFound.tsx` (redirects to `/`) |
 
+`Rates.tsx` (pricing calculator) exists but is **intentionally unrouted** — kept for a possible future freelance push. Routes are wrapped in `<main id="main-content">` with a skip link before the navbar.
+
 ## Key Files
 - `src/index.css` — global CSS, Tailwind theme tokens, all component classes (includes `.blog-content`, `.tiptap-editor`, `.editor-toolbar`)
 - `src/i18n.ts` — all EN/ES strings (no external files)
@@ -41,12 +42,13 @@ Danny Valdivia — Frontend/UX developer. Portfolio deployed to GitHub Pages at 
 - `src/controllers/themeController.ts` — light/dark theme via `data-theme` on `<html>`
 - `src/controllers/authController.ts` — admin login/logout/isAuthenticated via sessionStorage + `.env` creds
 - `src/controllers/blogController.ts` — blog CRUD (localStorage), `slugify()`, `estimateReadTime()`, `getAllPosts()`
-- `src/view/components/Navbar.tsx` — sticky nav, language toggle, smooth scroll
+- `src/hooks/usePageTitle.ts` — per-route `document.title` ("Danny Valdivia — <page>")
+- `src/view/components/Navbar.tsx` — sticky nav, Projects/Contact hash links, language toggle
 - `src/view/components/PrivateRoute.tsx` — redirects to `/admin` if not authenticated
 - `src/view/components/admin/RichEditor.tsx` — Tiptap WYSIWYG wrapper
 - `src/view/components/admin/Toolbar.tsx` — formatting toolbar (bold, italic, headings, lists, code, link, image, HR)
-- `src/view/pages/Home.tsx` — hero, about bullets, projects grid, contact form, social links
-- `src/view/pages/Rates.tsx` — interactive pricing calculator
+- `src/view/pages/Home.tsx` — hero, about section (bio + 3 cards), projects grid, contact form, social links (LinkedIn/GitHub/Email/Calendly); scrolls to `#projects`/`#contact` on hash navigation
+- `src/view/pages/Rates.tsx` — interactive pricing calculator (unrouted)
 - `src/view/pages/AccessibilityChecker.tsx` — WAVE API integration
 - `src/view/pages/Blog.tsx` — public blog listing (published posts only)
 - `src/view/pages/BlogPost.tsx` — public post detail with `.blog-content` prose styles
@@ -54,10 +56,11 @@ Danny Valdivia — Frontend/UX developer. Portfolio deployed to GitHub Pages at 
 - `src/view/pages/admin/AdminDashboard.tsx` — post list, create/edit/delete
 - `src/view/pages/admin/PostEditor.tsx` — full post editor (title, slug, excerpt, tags, date, read time, cover image, RichEditor)
 
-## Assets (`src/assets/`)
-linkedin.svg, github-light.svg, github-dark.svg, calendly.svg, icons8-whatsapp.svg,
-image-of-laptop-screen-with-computer-code.webp, thatsveryadhd.png, expensevue.png,
-BloomIcon.ico, css-logo.png, html-logo.png, javascript-logo.png
+## Assets
+- `src/assets/`: linkedin.svg, github-light.svg, calendly.svg, icons8-whatsapp.svg,
+image-of-laptop-screen-with-computer-code.webp, bloom.png, theyogagame.png, expensevue.png,
+tunebuddy.png, EN.png, SP.png
+- `public/`: favicon.svg, favicon-32.png, og-image.png (1200×630 social preview), robots.txt, sitemap.xml, 404.html
 
 ## Contact / Social
 - LinkedIn: https://www.linkedin.com/in/dannyvaldivia/
@@ -76,9 +79,12 @@ BloomIcon.ico, css-logo.png, html-logo.png, javascript-logo.png
 - **Built-in posts:** static seed posts show a "built-in" badge in the dashboard; editing them saves a local override
 - **Admin auth:** credentials in `.env` (`VITE_ADMIN_USER`, `VITE_ADMIN_PASS`); session stored in `sessionStorage` (clears on tab close)
 - **Admin URL:** `/admin` locally at `localhost:5173/admin`, live at `dluisvaldivia.github.io/DVPortfolio/admin`
+- **Visibility:** the blog is public but **intentionally unlinked** from the navbar and excluded from `sitemap.xml`. The current seed posts are AI-drafted; Danny will surface the blog (nav link etc.) once he writes a post of his own.
 
 ## Projects Section (`src/view/components/card.tsx` + `src/models/cardsData.ts`)
-- Active projects: Bloom, The Yoga Game, ExpenseVue — SO DIVERGENT removed
+- Active projects: Bloom, The Yoga Game, ExpenseVue, TuneBuddy — SO DIVERGENT removed
+- `Card` data model is intentionally minimal: `id`, `title`, `link?`, `thumbnail?` — richer case-study fields were removed as dead code (never rendered)
+- Bloom status badge: "Pre-MVP — login unavailable" (ES: "inicio de sesión no disponible"); its link intentionally points to the staging server
 - Project card button is an `<a>` with `button-primary` class (not a nested `<button>`) — fixes pointer cursor and click area
 - `LuExternalLink` icon (react-icons/lu) sits `absolute top-2 right-2` inside the button
 - `button-primary:focus-visible` uses a 2px `#2222F7` outline for keyboard nav visibility
@@ -96,10 +102,24 @@ BloomIcon.ico, css-logo.png, html-logo.png, javascript-logo.png
 - All contact CSS lives in `src/index.css` under classes prefixed `.contact-*`
 - `@keyframes contact-spin` defined outside `@layer components` alongside `@keyframes ripple-flash`
 
+## SEO / Social preview
+- `index.html` head: full title, meta description, canonical, theme-color, OG + Twitter card tags (absolute URLs), favicon links via `%BASE_URL%`
+- `public/og-image.png` — 1200×630 branded preview; regenerate if the tagline changes
+- `robots.txt` + `sitemap.xml` in `public/` (sitemap lists `/` and the accessibility checker only)
+- Per-route titles via `usePageTitle` hook (all pages incl. admin)
+
+## Accessibility
+- `<html lang>` syncs with the active i18n language (set in `src/i18n.ts`)
+- App is wrapped in framer-motion `<MotionConfig reducedMotion="user">`; the hero grid (`data-grid-hero.tsx`) and `.grid-cell` CSS also honor `prefers-reduced-motion`
+- Skip link (`.skip-link`) + `<main id="main-content">` landmark in `App.tsx`; `#about/#projects/#contact` have `scroll-margin-top` for the sticky navbar
+- Contrast: use `#00a880` (not `#00674F`) for text-on-dark accents; body-text alphas on dark must stay ≥0.55
+- Contact form: native validation (no `noValidate`) + trim-check in `handleContactSubmit`; Calendly calls are guarded (`window.Calendly?.`)
+
 ## Notes
 - No tailwind.config file — Tailwind v4 config is entirely in `src/index.css`
-- Theme toggle persists to `localStorage` via `themeController`
+- Theme toggle persists to `localStorage` via `themeController` (no toggle UI is currently rendered — site ships dark)
 - Calendly widget loaded via CDN script in `index.html`
 - GH Pages SPA redirect handled via `sessionStorage` script in `index.html`
 - `.env` is gitignored — contains `VITE_WAVE_API_KEY`, `VITE_ADMIN_USER`, `VITE_ADMIN_PASS`, `VITE_EMAILJS_*`
 - framer-motion v12: bezier ease arrays must be cast `as [number, number, number, number]` to satisfy the `Easing` type
+- All user-facing strings (contact form, card buttons, social subtitles, skip link) live in `src/i18n.ts` — never hardcode UI text in components

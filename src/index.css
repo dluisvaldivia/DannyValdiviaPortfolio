@@ -1,6 +1,5 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 @import "@fontsource-variable/geist";
 
 @custom-variant dark (&:is(.dark *));
@@ -1085,16 +1084,6 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
-    --shadow-md: var(----shadow-md);
-    --font-bold: var(----font-bold);
-    --font-lg: var(----font-lg);
-    --font-7xl: var(----font-7xl);
-    --color-orange: var(----orange);
-    --color-yellow: var(----yellow);
-    --color-cyan: var(----cyan);
-    --color-pink: var(----pink);
-    --color-green: var(----green);
-    --color-foreground-muted: var(----foreground-muted);
 }
 
 @keyframes contact-spin {
