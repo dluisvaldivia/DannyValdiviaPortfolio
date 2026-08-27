@@ -19,7 +19,6 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const navLinks = [
-    { to: '/#projects', label: t('nav.projects') },
     { to: '/#contact', label: t('nav.contact') },
     { to: '/free-tools/accessibility-checker', label: t('nav.accessibility_check') },
   ];

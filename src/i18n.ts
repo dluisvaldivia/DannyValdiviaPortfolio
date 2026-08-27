@@ -16,29 +16,27 @@ const resources = {
             },
             "hero": {
                 "name": "Danny Valdivia",
-                "tagline1": "Full Stack Developer — UI/UX & Accessibility (WCAG)",
+                "headline": "User experience that works for everyone",
+                "tagline1": "Full Stack Developer - UI/UX & Accessibility",
                 "tagline2": ""
             },
             "about": {
-                "bio": "I'm a UI/UX web developer at Bloom Growth Solutions, where I've built the front end of a multi-portal B2B SaaS platform as the sole frontend developer — from Figma prototypes to a WCAG 2.1 AA production interface. Based in Málaga, Spain, working in English and Spanish.",
-                "reducing_friction_title": "Reducing Friction",
-                "reducing_friction_desc": "Translating complex business logic into intuitive, high-performance digital systems.",
-                "universal_design_title": "Universal Design",
-                "universal_design_desc": "Specialist capability in architecting WCAG/EAA-compliant systems for products requiring high-stakes inclusivity and universal reach.",
-                "strategic_optimization_title": "Strategic Optimization",
-                "strategic_optimization_desc": "Trimming technical and process \"noise\" to maximize project efficacy and team velocity."
+                "eyebrow": "Get to know me",
+                "bio": "Web developer focused on interfaces, user experience, and accessibility.\nI started young, repairing computers and installing operating systems. Later I studied graphic design, then systems administration, and spent several years training professionals. Today I build web applications, where the visual and the technical come together as one.\nI learn fast. When something doesn't work the way it should, I dig into it until I understand it, and when I need to explain it to someone, I do it without jargon.\nI currently live in Málaga, Spain, and work in English and Spanish.",
+                "linkedin_cta": "Visit me on LinkedIn"
             },
             "headings": {
                 "about": "About me",
                 "projects": "Work & Projects",
-                "contact": "Contact me"
+                "contact": "Let's build something"
             },
             "projects": {
+                "eyebrow": "What I've built",
                 "github_cta": "View more on GitHub",
-                "github_cta_aria": "Danny's GitHub — open source work"
+                "github_cta_aria": "Danny's GitHub - open source work"
             },
             "contact": {
-                "eyebrow": "Let's build something",
+                "eyebrow": "Contact me",
                 "form_aria": "Contact form",
                 "name_label": "Your Name",
                 "name_placeholder": "Jane Smith",
@@ -62,9 +60,6 @@ const resources = {
                 "github_title": "GitHub",
                 "github_sub": "Code & projects",
                 "github_label": "Danny's GitHub",
-                "email_title": "Email",
-                "email_sub": "dluis.valdivia@gmail.com",
-                "email_label": "Email Danny",
                 "calendly_title": "Calendly",
                 "calendly_sub": "Book a 30-min call",
                 "calendly_label": "Schedule time with Danny"
@@ -72,15 +67,20 @@ const resources = {
             "cards": {
                 "visit": "Visit {{title}}",
                 "visit_aria": "Visit {{title}}, opens in new tab",
-                "1": { "title": "Bloom", "description": "Growth Hacking Teams Platform that connects freelancers and companies to form high-performing collaborative teams. The platform enables skill-based team formation, project collaboration, and transparent performance tracking.", "status": "Pre-MVP — login unavailable" },
+                "1": { "title": "Bloom", "description": "Growth Hacking Teams Platform that connects freelancers and companies to form high-performing collaborative teams. The platform enables skill-based team formation, project collaboration, and transparent performance tracking.", "status": "Pre-MVP - login unavailable" },
                 "2": { "title": "The Yoga Game", "description": "Colorful and engaging yoga app for kids. Features multiple game modes, pose timers, and fun countdown sounds to keep children motivated and engaged." },
                 "4": { "title": "ExpenseVue", "description": "Expense management application with integration to banking data." },
                 "5": { "title": "TuneBuddy", "description": "Elegant instrument tuning app with standard tuning presets for guitar and ukulele, plus a built-in metronome tool." }
             },
             "accessibility_checker": {
                 "title": "Accessibility Checker",
-                "description": "Every website should be usable by everyone — including people who are blind, have low vision, motor difficulties, or rely on a keyboard instead of a mouse. Accessibility issues are often invisible to sighted users, but they can make a site completely unusable for others. This tool scans any public website and shows you exactly what might be blocking people from using it, in plain English — no technical knowledge needed.",
-                "why_matters": "Why does it matter? Aside from being the right thing to do, accessibility is now a legal requirement in many countries under laws like the European Accessibility Act (EAA) and the ADA. Fixing these issues improves the experience for all your users, not just those with disabilities."
+                "description": "A website should be usable by everyone, including people who have a disability, whether congenital or acquired.",
+                "description_scan": "This checker, with the help of WAVE API, scans any public website and shows you exactly what might be blocking people from using it, in plain English, no technical knowledge needed.",
+                "why_matters": "Why does it matter? Aside from being the right thing to do, accessibility is now a legal requirement in many countries under laws like the European Accessibility Act (EAA) and the Americans with Disabilities Act (ADA). Fixing these issues improves the experience for all your users, not just those with disabilities.",
+                "url_label": "Website URL to check",
+                "check_cta": "Check your site",
+                "checking": "Checking...",
+                "fetch_error": "Failed to fetch report. Please check the URL and try again."
             },
             "rates": {
                 "heading": "Need a site?",
@@ -125,29 +125,27 @@ const resources = {
             },
             "hero": {
                 "name": "Danny Valdivia",
-                "tagline1": "Desarrollador Full Stack — UI/UX y Accesibilidad (WCAG)",
+                "headline": "Experiencia de usuario que funciona para todos",
+                "tagline1": "Desarrollador Full Stack - UI/UX y Accesibilidad",
                 "tagline2": ""
             },
             "about": {
-                "bio": "Soy desarrollador web UI/UX en Bloom Growth Solutions, donde he construido el front end de una plataforma SaaS B2B multi-portal como único desarrollador frontend — desde los prototipos en Figma hasta una interfaz en producción conforme a WCAG 2.1 AA. Resido en Málaga, España, y trabajo en inglés y español.",
-                "reducing_friction_title": "Reduciendo la Fricción",
-                "reducing_friction_desc": "Traduciendo lógica de negocio compleja en sistemas digitales intuitivos y de alto rendimiento.",
-                "universal_design_title": "Diseño Universal",
-                "universal_design_desc": "Capacidad especialista en la arquitectura de sistemas compatibles con WCAG/EAA para productos que requieren alta inclusión y alcance universal.",
-                "strategic_optimization_title": "Optimización Estratégica",
-                "strategic_optimization_desc": "Eliminando el \"ruido\" técnico y de procesos para maximizar la eficacia del proyecto y la velocidad del equipo."
+                "eyebrow": "Conóceme",
+                "bio": "Desarrollador web centrado en interfaces, experiencia de usuario y accesibilidad.\nEmpecé de joven reparando equipos e instalando sistemas operativos. Luego estudié diseño gráfico, más tarde administración de sistemas, y pasé varios años formando a profesionales. Hoy construyo aplicaciones web, donde lo visual y lo técnico van en la misma pieza.\nAprendo rápido. Cuando algo no funciona como debería, lo investigo hasta entenderlo, y cuando hay que explicárselo a alguien, lo hago sin tecnicismos.\nActualmente resido en Málaga, España, y trabajo en inglés y español.",
+                "linkedin_cta": "Visítame en LinkedIn"
             },
             "headings": {
                 "about": "Sobre mí",
                 "projects": "Proyectos",
-                "contact": "Contáctame"
+                "contact": "Construyamos algo"
             },
             "projects": {
+                "eyebrow": "Lo que he construido",
                 "github_cta": "Ver más en GitHub",
-                "github_cta_aria": "GitHub de Danny — proyectos open source"
+                "github_cta_aria": "GitHub de Danny - proyectos open source"
             },
             "contact": {
-                "eyebrow": "Construyamos algo",
+                "eyebrow": "Contáctame",
                 "form_aria": "Formulario de contacto",
                 "name_label": "Tu nombre",
                 "name_placeholder": "María García",
@@ -171,9 +169,6 @@ const resources = {
                 "github_title": "GitHub",
                 "github_sub": "Código y proyectos",
                 "github_label": "GitHub de Danny",
-                "email_title": "Correo",
-                "email_sub": "dluis.valdivia@gmail.com",
-                "email_label": "Escríbeme un correo",
                 "calendly_title": "Calendly",
                 "calendly_sub": "Reserva una llamada de 30 min",
                 "calendly_label": "Agenda una llamada con Danny"
@@ -181,15 +176,20 @@ const resources = {
             "cards": {
                 "visit": "Visitar {{title}}",
                 "visit_aria": "Visitar {{title}}, se abre en una pestaña nueva",
-                "1": { "title": "Bloom", "description": "Plataforma de equipos de Growth Hacking que conecta freelancers y empresas para formar equipos colaborativos de alto rendimiento. La plataforma permite la formación de equipos basada en habilidades, la colaboración en proyectos y el seguimiento transparente del rendimiento.", "status": "Pre-MVP — inicio de sesión no disponible" },
+                "1": { "title": "Bloom", "description": "Plataforma de equipos de Growth Hacking que conecta freelancers y empresas para formar equipos colaborativos de alto rendimiento. La plataforma permite la formación de equipos basada en habilidades, la colaboración en proyectos y el seguimiento transparente del rendimiento.", "status": "Pre-MVP - inicio de sesión no disponible" },
                 "2": { "title": "The Yoga Game", "description": "App de yoga colorida y dinámica para niños. Incluye varios modos de juego, temporizadores de posturas y divertidos sonidos de cuenta regresiva para mantener a los niños motivados y entretenidos." },
                 "4": { "title": "ExpenseVue", "description": "Aplicación de gestión de gastos con integración a datos bancarios." },
                 "5": { "title": "TuneBuddy", "description": "Elegante app de afinación de instrumentos con presets de afinación estándar para guitarra y ukelele, además de un metrónomo incorporado." }
             },
             "accessibility_checker": {
                 "title": "Comprobador de Accesibilidad",
-                "description": "Cualquier sitio web debería poder usarlo cualquier persona — incluyendo personas ciegas, con baja visión, dificultades motoras, o que usan el teclado en lugar del ratón. Los problemas de accesibilidad suelen ser invisibles para los usuarios videntes, pero pueden hacer que un sitio sea completamente inutilizable para otros. Esta herramienta analiza cualquier sitio web público y te muestra exactamente qué podría estar impidiendo que la gente lo use, en un lenguaje sencillo — sin necesidad de conocimientos técnicos.",
-                "why_matters": "¿Por qué es importante? Además de ser lo correcto, la accesibilidad es ahora un requisito legal en muchos países bajo leyes como la Ley Europea de Accesibilidad (EAA) y la ADA. Corregir estos problemas mejora la experiencia para todos tus usuarios, no solo para los que tienen discapacidades."
+                "description": "Un sitio web debería poder usarlo cualquier persona, incluyendo quienes tienen una discapacidad, ya sea congénita o adquirida.",
+                "description_scan": "Este comprobador, con la ayuda de WAVE API, analiza cualquier sitio web público y te muestra exactamente qué podría estar impidiendo que la gente lo use, en un lenguaje sencillo, sin necesidad de conocimientos técnicos.",
+                "why_matters": "¿Por qué es importante? Además de ser lo correcto, la accesibilidad es ahora un requisito legal en muchos países bajo leyes como la Ley Europea de Accesibilidad (EAA) y la Ley de Estadounidenses con Discapacidades (ADA). Corregir estos problemas mejora la experiencia para todos tus usuarios, no solo para los que tienen discapacidades.",
+                "url_label": "URL del sitio web a analizar",
+                "check_cta": "Analiza tu sitio",
+                "checking": "Analizando...",
+                "fetch_error": "No se pudo obtener el informe. Comprueba la URL e inténtalo de nuevo."
             },
             "rates": {
                 "heading": "¿Necesitas un sitio web?",

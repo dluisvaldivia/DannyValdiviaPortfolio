@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import { useTranslation } from 'react-i18next'
 import Home from './view/pages/Home'
@@ -24,7 +24,7 @@ function App() {
   return (
     <MotionConfig reducedMotion="user">
       <Router basename={import.meta.env.BASE_URL}>
-        <a className="skip-link" href="#main-content">{t('nav.skip')}</a>
+        <Link className="skip-link" to="/#projects">{t('nav.skip')}</Link>
         <Navbar />
         <main id="main-content">
           <Routes>

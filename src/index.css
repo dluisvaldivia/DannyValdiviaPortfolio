@@ -51,18 +51,24 @@
         overflow-x: hidden;
     }
 
-    body::before {
+    #root {
+        @apply w-full flex-grow flex flex-col;
+    }
+
+    /* Dot grid lives on the main content column, so it scrolls with the page
+       and sits behind the sections rather than being painted by them. */
+    #main-content {
+        position: relative;
+    }
+
+    #main-content::before {
         content: '';
-        position: fixed;
+        position: absolute;
         inset: 0;
         z-index: 0;
         pointer-events: none;
-        background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
-        background-size: 28px 28px;
-    }
-
-    #root {
-        @apply w-full flex-grow flex flex-col;
+        background-image: radial-gradient(rgba(255,255,255,0.13) 1.4px, transparent 1.4px);
+        background-size: 19px 19px;
     }
 
     h1, h2, h3, h4, h5 {
@@ -335,8 +341,16 @@
 
     @media (max-width: 639px) {
         .h1hero {
-            font-size: 15.5vw;
+            /* "VALDIVIA" is 8 wide Zen Dots glyphs; anything above ~11vw
+               overflows once the hero's horizontal padding is subtracted. */
+            font-size: 10.5vw;
         }
+    }
+
+    /* Never let the display type push past the viewport */
+    .h1hero {
+        max-width: 100%;
+        overflow-wrap: break-word;
     }
 
     /* ── Navbar ── */
@@ -590,6 +604,23 @@
         color: rgba(232, 232, 240, 0.75);
     }
 
+    .ac-description abbr[title] {
+        cursor: help;
+        text-decoration: underline dotted;
+        text-underline-offset: 3px;
+        text-decoration-color: rgba(0, 168, 128, 0.7);
+    }
+
+    .ac-description a {
+        color: #00a880;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+    }
+
+    .ac-description a:hover {
+        color: #22ffc4;
+    }
+
     .ac-description-why {
         padding: 1rem 1.25rem;
         border-left: 3px solid #00674F;
@@ -815,13 +846,23 @@
     }
 
     .contact-heading {
-        font-size: clamp(2.8rem, 7vw, 5rem) !important;
-        line-height: 1.05 !important;
+        font-size: clamp(2.5rem, 5.5vw, 5rem) !important;
+        line-height: 1.1 !important;
         margin: 0 0 1rem !important;
+        padding-bottom: 0.08em;
         background: linear-gradient(90deg, #00c87a 0%, #7b8cff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+    }
+
+    /* Let the heading break out of the 780px .contact-inner column on wide screens */
+    @media (min-width: 900px) {
+        .contact-heading-block {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            padding: 0 2rem;
+        }
     }
 
     .contact-subline {
@@ -832,50 +873,79 @@
     }
 
     /* ── About section ── */
+    .about-section {
+        position: relative;
+        overflow: hidden;
+        padding: 1rem;
+    }
+
+    @media (min-width: 640px) {
+        .about-section { padding: 1.5rem; }
+    }
+
+    @media (min-width: 768px) {
+        .about-section { padding: 2rem; }
+    }
+
+    .about-bg-glow {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background:
+            radial-gradient(ellipse 70% 60% at 12% 30%, rgba(0,103,79,0.10) 0%, transparent 65%),
+            radial-gradient(ellipse 60% 50% at 88% 70%, rgba(34,34,247,0.06) 0%, transparent 65%);
+    }
+
+    .about-inner {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* Shared section header treatment (About, Projects) */
+    .section-eyebrow {
+        font-size: 0.72rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: #00a880;
+        margin: 0 0 0.75rem;
+    }
+
+    .section-heading {
+        font-size: clamp(2.2rem, 5vw, 4rem) !important;
+        line-height: 1.1 !important;
+        margin: 0 0 1rem !important;
+        padding-bottom: 0.08em;
+        background: linear-gradient(90deg, #00c87a 0%, #7b8cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        width: fit-content;
+    }
+
     .about-bio {
-        font-size: 1.08rem;
-        line-height: 1.7;
-        color: rgba(232,232,240,0.85);
         max-width: 62ch;
-        margin: 1.25rem 0 2rem;
+        margin: 1.5rem 0 2rem;
     }
 
-    .about-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.25rem;
+    .about-bio p {
+        font-size: 1.08rem;
+        line-height: 1.75;
+        color: rgba(232,232,240,0.75);
+        margin: 0 0 1.15rem;
     }
 
-    .about-card {
-        background: rgba(255,255,255,0.035);
-        border: 1px solid rgba(255,255,255,0.1);
-        border-radius: 8px;
-        padding: 1.5rem;
-        backdrop-filter: blur(18px);
-        -webkit-backdrop-filter: blur(18px);
-        box-shadow:
-            inset 0 1px 0 rgba(255,255,255,0.07),
-            0 0 40px rgba(0,103,79,0.06);
-        transition: border-color 0.25s ease, box-shadow 0.25s ease;
+    .about-bio p:last-child {
+        margin-bottom: 0;
     }
 
-    .about-card:hover {
-        border-color: rgba(0,103,79,0.7);
-        box-shadow: 0 0 0 1px rgba(0,103,79,0.15), 0 4px 24px rgba(0,103,79,0.12);
-    }
-
-    .about-card__title {
-        font-size: 1.05rem;
-        font-weight: 700;
-        color: #ffffff;
-        margin: 0 0 0.5rem;
-    }
-
-    .about-card__desc {
-        font-size: 0.92rem;
-        line-height: 1.65;
-        color: rgba(232,232,240,0.7);
-        margin: 0;
+    .about-bio .about-lede {
+        font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+        line-height: 1.5;
+        font-weight: 500;
+        color: rgba(255,255,255,0.95);
+        margin-bottom: 1.75rem;
     }
 
     .contact-form-card {

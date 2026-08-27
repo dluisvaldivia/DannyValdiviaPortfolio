@@ -15,9 +15,9 @@ const fadeUp = {
 const CATEGORY_META: Record<string, { label: string; description: string }> = {
     error:     { label: 'Broken things',          description: 'Elements that completely block users with assistive technology.' },
     contrast:  { label: 'Hard to read',           description: 'Text with colour contrast too low for many people to read.' },
-    alert:     { label: 'Possible issues',         description: 'Things that might be barriers — a human needs to confirm.' },
+    alert:     { label: 'Possible issues',         description: 'Things that might be barriers, a human needs to confirm.' },
     feature:   { label: 'Accessibility features', description: 'Good stuff already helping people who use assistive technology.' },
-    structure: { label: 'Page structure',          description: 'Headings and landmarks — how screen readers navigate your page.' },
+    structure: { label: 'Page structure',          description: 'Headings and landmarks, how screen readers navigate your page.' },
     aria:      { label: 'Screen reader support',  description: 'Code giving extra context to screen readers. Missing values confuse blind users.' },
 };
 
@@ -49,7 +49,7 @@ const AccessibilityChecker = () => {
                 setReport(data);
             }
         } catch (err) {
-            setError("Failed to fetch report. Please check the URL and try again.");
+            setError(t('accessibility_checker.fetch_error'));
             console.error(err);
         } finally {
             setLoading(false);
@@ -89,7 +89,7 @@ const AccessibilityChecker = () => {
         : 0;
 
     const summaryHeadline = totalIssues === 0
-        ? 'Great news — no critical issues were detected on this page.'
+        ? 'Great news, no critical issues were detected on this page.'
         : `This page has ${totalIssues} issue${totalIssues !== 1 ? 's' : ''} that could prevent people from using it.`;
 
     const whatsappClick = () => {
@@ -130,11 +130,12 @@ const AccessibilityChecker = () => {
 
                     <div className="ac-description">
                         <p>{t('accessibility_checker.description')}</p>
+                        <p>{t('accessibility_checker.description_scan')}</p>
                         <p className="ac-description-why">{t('accessibility_checker.why_matters')}</p>
                     </div>
 
                     <div className="ac-input-group">
-                        <label htmlFor="site-url" className="sr-only">Website URL to check</label>
+                        <label htmlFor="site-url" className="sr-only">{t('accessibility_checker.url_label')}</label>
                         <input
                             id="site-url"
                             type="text"
@@ -144,7 +145,7 @@ const AccessibilityChecker = () => {
                             onKeyDown={(e) => e.key === 'Enter' && handleCheck()}
                         />
                         <button className="button-primary" onClick={handleCheck} disabled={loading}>
-                            {loading ? "Checking..." : "Check your site"}
+                            {loading ? t('accessibility_checker.checking') : t('accessibility_checker.check_cta')}
                         </button>
                     </div>
 
@@ -181,7 +182,7 @@ const AccessibilityChecker = () => {
                                 </button>
                             </motion.div>
 
-                            {/* Summary grid — grouped */}
+                            {/* Summary grid, grouped */}
                             {(() => {
                                 const groups = [
                                     {
@@ -199,7 +200,7 @@ const AccessibilityChecker = () => {
                                     {
                                         keys: ['structure', 'aria'],
                                         label: 'Page details',
-                                        sublabel: "An overview of your page's structure and screen reader support. More items isn't bad — it just means more to review.",
+                                        sublabel: "An overview of your page's structure and screen reader support. More items isn't bad, it just means more to review.",
                                         labelColor: 'text-blue-400',
                                     },
                                 ];

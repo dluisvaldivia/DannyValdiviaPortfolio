@@ -5,7 +5,7 @@ import CardsList from '../components/cardList';
 import linkedinIcon from '../../assets/linkedin.svg';
 import githubIcon from '../../assets/github-light.svg';
 import calendlyIcon from '../../assets/calendly.svg';
-import { LuExternalLink, LuMail } from 'react-icons/lu';
+import { LuExternalLink } from 'react-icons/lu';
 import type { IconType } from 'react-icons';
 import { useTranslation } from 'react-i18next';
 import emailjs from '@emailjs/browser';
@@ -27,7 +27,7 @@ const fadeUp = {
 };
 
 type SocialLink = {
-  key: 'linkedin' | 'github' | 'email' | 'calendly';
+  key: 'linkedin' | 'github' | 'calendly';
   href: string;
   icon?: string;
   IconComp?: IconType;
@@ -37,7 +37,6 @@ type SocialLink = {
 const socialLinks: SocialLink[] = [
   { key: 'linkedin', href: 'https://www.linkedin.com/in/dannyvaldivia/', icon: linkedinIcon },
   { key: 'github', href: 'https://github.com/dluisvaldivia', icon: githubIcon },
-  { key: 'email', href: 'mailto:dluis.valdivia@gmail.com', IconComp: LuMail },
   { key: 'calendly', href: 'https://calendly.com/dluis-valdivia/30min', icon: calendlyIcon, isCalendly: true },
 ];
 
@@ -57,6 +56,9 @@ export default function Home() {
       window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
     requestAnimationFrame(() => el.scrollIntoView({ behavior }));
   }, [location]);
+
+  // Bio is authored as one string per locale; each line is its own paragraph
+  const aboutParagraphs = t('about.bio').split('\n').map(p => p.trim()).filter(Boolean);
 
   const [formStatus, setFormStatus] = useState<FormStatus>('idle');
   const [formValues, setFormValues] = useState({ name: '', email: '', message: '' });
@@ -93,7 +95,7 @@ export default function Home() {
   };
 
   const openCalendly = (e: React.MouseEvent) => {
-    if (!window.Calendly) return; // widget blocked/unavailable — follow the plain link instead
+    if (!window.Calendly) return; // widget blocked/unavailable, follow the plain link instead
     e.preventDefault();
     window.Calendly.initPopupWidget({ url: 'https://calendly.com/dluis-valdivia/30min' });
   };
@@ -133,18 +135,30 @@ export default function Home() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="h1hero gradient-text font-bold tracking-tight mb-8 text-left w-fit mx-2 px-4 md:mx-10 md:px-10"
+            className="h1hero gradient-text font-bold tracking-tight mb-8 text-left w-fit self-start mx-2 px-4 md:mx-10 md:px-10"
             style={{ fontFamily: "'Zen Dots', sans-serif", textTransform: 'uppercase' }}
           >
             {t('hero.name')}
           </motion.h1>
 
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            className="text-2xl md:text-4xl font-semibold uppercase tracking-wide mb-3 pt-2 text-left w-fit self-start mx-2 px-4 md:mx-10 md:px-10"
+            style={{ color: '#ffffff' }}
+          >
+            <span className="inline-block origin-bottom scale-y-125">
+              {t('hero.headline')}
+            </span>
+          </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.38, ease: [0.22, 1, 0.36, 1] }}
-            className="text-xl md:text-2xl font-light mb-3"
-            style={{ color: '#ffffff' }}
+            transition={{ duration: 0.6, delay: 0.42, ease: [0.22, 1, 0.36, 1] }}
+            className="text-xl md:text-2xl font-light mb-3 text-left w-fit self-start mx-2 px-4 md:mx-10 md:px-10"
+            style={{ color: 'rgba(255,255,255,0.72)' }}
           >
             {t('hero.tagline1')}
           </motion.p>
@@ -152,39 +166,7 @@ export default function Home() {
         </DataGridHero>
       </motion.div>
 
-      <div className="shimmer-line" />
-
-      {/* ── ABOUT ── */}
-      <motion.section
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: '-60px' }}
-        className="mb-14 p-4 sm:p-6 md:p-8"
-        aria-labelledby="about"
-      >
-        <motion.h2
-          variants={fadeUp}
-          id="about"
-          className="text-white mb-2"
-          style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
-        >
-          {t('headings.about')}
-        </motion.h2>
-        <div className="shimmer-line" />
-        <motion.p variants={fadeUp} custom={1} className="about-bio">
-          {t('about.bio')}
-        </motion.p>
-        <div className="about-grid">
-          {(['reducing_friction', 'universal_design', 'strategic_optimization'] as const).map((key, i) => (
-            <motion.div key={key} variants={fadeUp} custom={i + 2} className="about-card">
-              <h3 className="about-card__title">{t(`about.${key}_title`)}</h3>
-              <p className="about-card__desc">{t(`about.${key}_desc`)}</p>
-            </motion.div>
-          ))}
-        </div>
-      </motion.section>
-
-      <div className="shimmer-line" />
+<div className="shimmer-line" />
 
       {/* ── PROJECTS ── */}
       <motion.section
@@ -193,6 +175,7 @@ export default function Home() {
         viewport={{ once: true, margin: '-60px' }}
         className="mb-14 relative overflow-hidden"
         style={{ borderRadius: '6px' }}
+        aria-labelledby="projects"
       >
         <div
           aria-hidden
@@ -215,12 +198,10 @@ export default function Home() {
           }}
         />
         <div className="relative z-10 p-4 sm:p-6 md:p-8">
-          <motion.h2
-            variants={fadeUp}
-            id="projects"
-            className="text-white mb-2"
-            style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)' }}
-          >
+          <motion.p variants={fadeUp} className="section-eyebrow">
+            {t('projects.eyebrow')}
+          </motion.p>
+          <motion.h2 variants={fadeUp} custom={1} id="projects" className="section-heading">
             {t('headings.projects')}
           </motion.h2>
           <div className="shimmer-line" />
@@ -237,6 +218,50 @@ export default function Home() {
               {t('projects.github_cta')}
               <LuExternalLink className="w-5 h-5" />
             </a>
+          </div>
+        </div>
+      </motion.section>
+
+      <div className="shimmer-line" />
+
+      {/* ── ABOUT ── */}
+      <motion.section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: '-60px' }}
+        className="about-section mb-14"
+        aria-labelledby="about"
+      >
+        <div className="about-bg-glow" aria-hidden="true" />
+
+        <div className="about-inner">
+          <motion.p variants={fadeUp} className="section-eyebrow">
+            {t('about.eyebrow')}
+          </motion.p>
+          <motion.h2 variants={fadeUp} custom={1} id="about" className="section-heading">
+            {t('headings.about')}
+          </motion.h2>
+          <div className="shimmer-line" />
+
+          <motion.div variants={fadeUp} custom={2} className="about-bio">
+            {aboutParagraphs.map((para, i) => (
+              <p key={i} className={i === 0 ? 'about-lede' : undefined}>{para}</p>
+            ))}
+          </motion.div>
+
+          <div className="flex justify-center">
+            <motion.a
+              variants={fadeUp}
+              custom={3}
+              href="https://www.linkedin.com/in/dannyvaldivia/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="button-primary cursor-pointer no-underline inline-flex items-center gap-3 text-base px-8 py-4 w-fit"
+            >
+              <img src={linkedinIcon} alt="LinkedIn" className="w-6 h-6" />
+              {t('about.linkedin_cta')}
+              <LuExternalLink className="w-5 h-5" />
+            </motion.a>
           </div>
         </div>
       </motion.section>
@@ -373,8 +398,8 @@ export default function Home() {
               <motion.a
                 key={s.key}
                 href={s.href}
-                target={s.href.startsWith('mailto:') ? undefined : '_blank'}
-                rel={s.href.startsWith('mailto:') ? undefined : 'noopener noreferrer'}
+                target="_blank"
+                rel="noopener noreferrer"
                 aria-label={t(`social.${s.key}_label`)}
                 onClick={s.isCalendly ? openCalendly : undefined}
                 initial={{ opacity: 0, y: 20 }}
